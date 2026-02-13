@@ -40,7 +40,7 @@ export default function Sidebar() {
         </NavLink>
 
         <NavLink
-          to="/roles"
+          to="/user-role"
           className={({ isActive }) =>
             `${baseLink} justify-between ${
               isActive ? activeLink : normalLink
@@ -54,7 +54,7 @@ export default function Sidebar() {
         </NavLink>
 
         <NavLink
-          to="/menu-rights"
+          to="/"
           className={({ isActive }) =>
             `${baseLink} ${isActive ? activeLink : normalLink}`
           }
@@ -82,7 +82,7 @@ export default function Sidebar() {
         {openUsers && (
           <div className="mt-1">
             <NavLink
-              to="/students"
+              to="/user"
               className={({ isActive }) =>
                 `flex items-center px-10 py-2 text-sm transition ${
                   isActive
