@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+ :root {
+            --primary-blue: #1a4b8c;
+            --secondary-blue: #2c6cb0;
+            --accent-gold: #d4af37;
+            --light-blue: #e8f2fc;
+            --dark-blue: #0d2b52;
+            --white: #ffffff;
+            --gray: #6b7280;
+            --light-gray: #f3f4f6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
