@@ -1,47 +1,45 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import "./Login.css"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 export default function Login() {
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-  })
+  });
+  const [showModal, setShowModal] = useState(false); // Modal visibility state
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const hardUsername = "admin"
-    const hardPassword = "123456"
+    const hardUsername = "admin";
+    const hardPassword = "123456";
 
-    if (
-      formData.username === hardUsername &&
-      formData.password === hardPassword
-    ) {
-      alert("Login Successful ✅")
-      navigate("/user-management")
+    if (formData.username === hardUsername && formData.password === hardPassword) {
+      setShowModal(true); // Show success modal
+      setTimeout(() => {
+        navigate("/user-management"); // Navigate after modal is shown for 2 seconds
+      }, 2000);
     } else {
-      alert("Invalid Username or Password ❌")
+      alert("Invalid Username or Password ❌");
     }
-  }
+  };
 
   return (
     <div className="login-container">
       <div className="login-wrapper">
-
         <div className="left-side">
           <div className="logo-container">
             <div className="logo-icon"></div>
-          </div>    
+          </div>
         </div>
 
         <div className="right-side">
@@ -85,9 +83,17 @@ export default function Login() {
               Sign In
             </button>
           </form>
-        </div>
 
+          {/* Success Modal */}
+          {showModal && (
+            <div className="modal">
+              <div className="modal-content">
+                <h3>Login Successful ✅</h3>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
-  )
+  );
 }
