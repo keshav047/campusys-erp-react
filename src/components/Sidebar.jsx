@@ -15,6 +15,7 @@ export default function Sidebar() {
 
   return (
     <aside className="w-[280px] bg-white border-r min-h-screen shadow-sm">
+      
       {/* Header Section */}
       <div className="px-6 py-5 border-b">
         <h2 className="text-lg font-semibold text-[var(--primary-blue)]">
@@ -31,10 +32,9 @@ export default function Sidebar() {
           Main Menu
         </div>
 
-        {/* Dashboard */}
+        {/* ✅ Dashboard FIXED */}
         <NavLink
-          to="/"
-          end
+          to="/dashboard"
           className={({ isActive }) =>
             `${baseLink} ${isActive ? activeLink : normalLink}`
           }

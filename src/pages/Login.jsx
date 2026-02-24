@@ -20,9 +20,17 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    if (formData.username && formData.password) {
+    const hardUsername = "admin"
+    const hardPassword = "123456"
+
+    if (
+      formData.username === hardUsername &&
+      formData.password === hardPassword
+    ) {
       alert("Login Successful ✅")
       navigate("/user-management")
+    } else {
+      alert("Invalid Username or Password ❌")
     }
   }
 
@@ -30,17 +38,12 @@ export default function Login() {
     <div className="login-container">
       <div className="login-wrapper">
 
-        {/* LEFT SIDE DESIGN */}
         <div className="left-side">
           <div className="logo-container">
-            <div className="logo-container">
-  <div className="logo-icon"></div>
-</div>
-
+            <div className="logo-icon"></div>
           </div>    
         </div>
 
-        {/* RIGHT SIDE LOGIN FORM */}
         <div className="right-side">
           <div className="login-header">
             <h2>Welcome to Campusys</h2>
@@ -71,12 +74,12 @@ export default function Login() {
                 required
               />
             </div>
-            <div className="forgot-link">
-  <span onClick={() => navigate("/forgot-password")}>
-    Forgot Password?
-  </span>
-</div>
 
+            <div className="forgot-link">
+              <span onClick={() => navigate("/forgot-password")}>
+                Forgot Password?
+              </span>
+            </div>
 
             <button type="submit" className="login-btn">
               Sign In
