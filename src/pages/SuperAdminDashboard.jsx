@@ -1,7 +1,18 @@
 import React from "react";
 import "./SuperAdminDashboard.css";
+import { Link } from "react-router-dom";
 
 const SuperAdminDashboard = () => {
+
+  const modules = [
+    { icon: "👥", title: "User Management", desc: "Manage user accounts", link: "/user-management" },
+    { icon: "📘", title: "Academics", desc: "Curriculum & courses" },
+    { icon: "✅", title: "Attendance", desc: "Track student presence" },
+    { icon: "📈", title: "Performance", desc: "Grades & analytics" },
+    { icon: "📅", title: "Timetable", desc: "Class schedules" },
+    { icon: "📢", title: "Announcements", desc: "School notices" },
+  ];
+
   return (
     <div className="dashboard-wrapper">
 
@@ -26,20 +37,27 @@ const SuperAdminDashboard = () => {
             </div>
 
             <div className="modules-grid">
-              {[
-                { icon: "🎓", title: "Student Portal", desc: "Manage student information" },
-                { icon: "📘", title: "Academics", desc: "Curriculum & courses" },
-                { icon: "✅", title: "Attendance", desc: "Track student presence" },
-                { icon: "📈", title: "Performance", desc: "Grades & analytics" },
-                { icon: "📅", title: "Timetable", desc: "Class schedules" },
-                { icon: "📢", title: "Announcements", desc: "School notices" },
-              ].map((module, index) => (
-                <div key={index} className="module-card">
-                  <div className="module-icon">{module.icon}</div>
-                  <h3>{module.title}</h3>
-                  <p>{module.desc}</p>
-                </div>
-              ))}
+              {modules.map((module, index) => {
+
+                const card = (
+                  <div className="module-card">
+                    <div className="module-icon">{module.icon}</div>
+                    <h3>{module.title}</h3>
+                    <p>{module.desc}</p>
+                  </div>
+                );
+
+                return module.link ? (
+                  <Link key={index} to={module.link} className="module-link">
+                    {card}
+                  </Link>
+                ) : (
+                  <div key={index}>
+                    {card}
+                  </div>
+                );
+
+              })}
             </div>
           </div>
 
@@ -54,9 +72,7 @@ const SuperAdminDashboard = () => {
               <div className="icon green">📢</div>
               <div className="comm-content">
                 <h4>Annual Sports Day Announcement</h4>
-                <p>
-                  Annual sports day will be held on 15th November. All students are requested to participate.
-                </p>
+                <p>Annual sports day will be held on 15th November. All students are requested to participate.</p>
                 <span className="time">2 hours ago</span>
               </div>
             </div>
@@ -65,32 +81,8 @@ const SuperAdminDashboard = () => {
               <div className="icon orange">👨‍👩‍👧</div>
               <div className="comm-content">
                 <h4>Parent-Teacher Meeting</h4>
-                <p>
-                  Quarterly parent-teacher meeting scheduled for 20th October.
-                </p>
+                <p>Quarterly parent-teacher meeting scheduled for 20th October.</p>
                 <span className="time">1 day ago</span>
-              </div>
-            </div>
-
-            <div className="communication-item">
-              <div className="icon red">⚠️</div>
-              <div className="comm-content">
-                <h4>Fee Payment Reminder</h4>
-                <p>
-                  Last date for fee payment is 30th September. Late fees will be applicable.
-                </p>
-                <span className="time">2 days ago</span>
-              </div>
-            </div>
-
-            <div className="communication-item">
-              <div className="icon blue">📘</div>
-              <div className="comm-content">
-                <h4>Library Book Return</h4>
-                <p>
-                  All library books issued in August must be returned by 10th October.
-                </p>
-                <span className="time">3 days ago</span>
               </div>
             </div>
 
@@ -121,6 +113,7 @@ const SuperAdminDashboard = () => {
               <span className="date">12 NOV</span>
               <p>Mid-term Exams Begin</p>
             </div>
+
           </div>
 
           {/* Quick Stats */}
@@ -150,9 +143,11 @@ const SuperAdminDashboard = () => {
                 <p>Pending Tasks</p>
               </div>
             </div>
+
           </div>
 
         </div>
+
       </div>
     </div>
   );

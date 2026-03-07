@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/dashboard.css";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import { Link } from "react-router-dom"
 
 const Dashboard = () => {
   return (
@@ -29,11 +30,13 @@ const Dashboard = () => {
               </div>
 
               <div className="modules-grid">
-                <div className="module-card">
-                  <div className="module-icon">🎓</div>
-                  <h3>Student Portal</h3>
-                  <p>Manage student information</p>
-                </div>
+                <Link to="/user-management">
+  <div className="module-card">
+    <div className="module-icon">🎓</div>
+    <h3>User Management</h3>
+    <p>Manage and control user accounts</p>
+  </div>
+</Link>
 
                 <div className="module-card">
                   <div className="module-icon">📘</div>

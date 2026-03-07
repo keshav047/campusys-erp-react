@@ -28,7 +28,7 @@ export default function Login() {
       formData.password === hardPassword
     ) {
       alert("Login Successful ✅")
-      navigate("/user-management")
+      navigate("/dashboard")
     } else {
       alert("Invalid Username or Password ❌")
     }

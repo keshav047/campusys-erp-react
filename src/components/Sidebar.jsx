@@ -17,14 +17,7 @@ export default function Sidebar() {
     <aside className="w-[280px] bg-white border-r min-h-screen shadow-sm">
       
       {/* Header Section */}
-      <div className="px-6 py-5 border-b">
-        <h2 className="text-lg font-semibold text-[var(--primary-blue)]">
-          User Management
-        </h2>
-        <p className="text-sm text-gray-500 mt-1">
-          Manage users, roles & permissions across the system
-        </p>
-      </div>
+      
 
       {/* Menu Section */}
       <div className="py-4">
