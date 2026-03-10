@@ -28,6 +28,7 @@ export default function Login() {
       formData.username === hardUsername &&
       formData.password === hardPassword
     ) {
+      localStorage.setItem("token","admin123")
       setShowModal(true);
 
       setTimeout(() => {

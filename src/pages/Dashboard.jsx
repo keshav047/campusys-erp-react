@@ -1,93 +1,86 @@
 import React from "react";
-import "../styles/dashboard.css";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
-  return (
-    <>
-      <Header />
-      <div className="main-container">
-        <Sidebar />
 
-        <div className="dashboard-content">
-          {/* Welcome Banner */}
-          <div className="welcome-banner">
-            <div>
-              <h1>Welcome back, John!</h1>
-              <p>Here's what's happening at Greenwood High School today</p>
-            </div>
-            <div className="welcome-icon">🏫</div>
+  const modules = [
+    { name: "User Management", icon: "🎓", description: "Manage user accounts", link: "/user-management" },
+    { name: "Academics", icon: "📘", description: "Curriculum & courses" },
+    { name: "Attendance", icon: "✅", description: "Track student presence" },
+    { name: "Performance", icon: "📊", description: "Grades & analytics" },
+    { name: "Timetable", icon: "📅", description: "Class schedules" },
+    { name: "Announcements", icon: "📢", description: "School notices" },
+  ];
+
+  const events = [
+    { date: "20 OCT", title: "Parent-Teacher Meeting", time: "10:00 AM - Main Auditorium" },
+    { date: "25 OCT", title: "Science Fair", time: "All Day - Gym Hall" },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50 p-6 font-sans">
+
+      {/* Welcome Banner */}
+      <div className="bg-gradient-to-r from-blue-700 to-indigo-500 text-white rounded-2xl p-8 flex justify-between items-center mb-8 shadow-lg">
+        <div>
+          <h1 className="text-3xl font-bold mb-1">Welcome back, John!</h1>
+          <p className="opacity-90">Here's what's happening at Greenwood High School today</p>
+        </div>
+        <div className="text-6xl animate-bounce">🏫</div>
+      </div>
+
+      {/* Dashboard Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        {/* Modules Section */}
+        <div className="md:col-span-2 space-y-6">
+          <div className="flex justify-between items-center mb-2">
+            <h2 className="text-xl font-semibold text-blue-900">My Modules</h2>
+            <span className="text-sm text-blue-700 hover:underline cursor-pointer">View All</span>
           </div>
 
-          <div className="dashboard-grid">
-            {/* Left Section */}
-            <div className="modules-section">
-              <div className="section-header">
-                <h2>My Assigned Modules</h2>
-                <span className="view-all">View All</span>
-              </div>
-
-              <div className="modules-grid">
-                <Link to="/user-management">
-  <div className="module-card">
-    <div className="module-icon">🎓</div>
-    <h3>User Management</h3>
-    <p>Manage and control user accounts</p>
-  </div>
-</Link>
-
-                <div className="module-card">
-                  <div className="module-icon">📘</div>
-                  <h3>Academics</h3>
-                  <p>Curriculum & courses</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {modules.map((mod, idx) => (
+              mod.link ? (
+                <Link key={idx} to={mod.link}>
+                  <div className="bg-white p-5 rounded-2xl shadow hover:shadow-xl transition cursor-pointer flex flex-col gap-3">
+                    <div className="text-4xl">{mod.icon}</div>
+                    <h3 className="font-semibold text-blue-900 text-lg">{mod.name}</h3>
+                    <p className="text-gray-500 text-sm">{mod.description}</p>
+                  </div>
+                </Link>
+              ) : (
+                <div key={idx} className="bg-white p-5 rounded-2xl shadow hover:shadow-xl transition flex flex-col gap-3">
+                  <div className="text-4xl">{mod.icon}</div>
+                  <h3 className="font-semibold text-blue-900 text-lg">{mod.name}</h3>
+                  <p className="text-gray-500 text-sm">{mod.description}</p>
                 </div>
-
-                <div className="module-card">
-                  <div className="module-icon">✅</div>
-                  <h3>Attendance</h3>
-                  <p>Track student presence</p>
-                </div>
-
-                <div className="module-card">
-                  <div className="module-icon">📊</div>
-                  <h3>Performance</h3>
-                  <p>Grades & analytics</p>
-                </div>
-
-                <div className="module-card">
-                  <div className="module-icon">📅</div>
-                  <h3>Timetable</h3>
-                  <p>Class schedules</p>
-                </div>
-
-                <div className="module-card">
-                  <div className="module-icon">📢</div>
-                  <h3>Announcements</h3>
-                  <p>School notices</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Section - Calendar */}
-            <div className="calendar-section">
-              <div className="section-header">
-                <h2>School Calendar</h2>
-                <span className="view-all">Full Calendar</span>
-              </div>
-
-              <div className="calendar-box">
-                <h3>October 2023</h3>
-                <p className="event-date">20 OCT</p>
-                <p className="event-title">Parent-Teacher Meeting</p>
-                <p className="event-time">10:00 AM - Main Auditorium</p>
-              </div>
-            </div>
+              )
+            ))}
           </div>
         </div>
+
+        {/* Upcoming Events / Calendar Section */}
+        <div className="space-y-4">
+          <div className="flex justify-between items-center mb-2">
+            <h2 className="text-xl font-semibold text-blue-900">Upcoming Events</h2>
+            <span className="text-sm text-blue-700 hover:underline cursor-pointer">Full Calendar</span>
+          </div>
+
+          <div className="space-y-4">
+            {events.map((ev, idx) => (
+              <div key={idx} className="bg-white p-5 rounded-2xl shadow hover:shadow-lg transition">
+                <p className="text-xs text-gray-400">{ev.date}</p>
+                <h3 className="font-semibold text-blue-900 text-lg">{ev.title}</h3>
+                <p className="text-gray-500 text-sm">{ev.time}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
-    </>
+
+    </div>
   );
 };
 
