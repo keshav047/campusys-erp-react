@@ -8,7 +8,8 @@ export default function Login() {
     username: "",
     password: "",
   });
-  const [showModal, setShowModal] = useState(false); // Modal visibility state
+
+  const [showModal, setShowModal] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -23,20 +24,15 @@ export default function Login() {
     const hardUsername = "admin";
     const hardPassword = "123456";
 
-<<<<<<< HEAD
     if (
       formData.username === hardUsername &&
       formData.password === hardPassword
     ) {
-      alert("Login Successful ✅")
-      navigate("/dashboard")
-=======
-    if (formData.username === hardUsername && formData.password === hardPassword) {
-      setShowModal(true); // Show success modal
+      setShowModal(true);
+
       setTimeout(() => {
-        navigate("/user-management"); // Navigate after modal is shown for 2 seconds
+        navigate("/dashboard");
       }, 2000);
->>>>>>> 5293667a29a985da4dba3a4323bf4ffb803f93ae
     } else {
       alert("Invalid Username or Password ❌");
     }
@@ -93,7 +89,6 @@ export default function Login() {
             </button>
           </form>
 
-          {/* Success Modal */}
           {showModal && (
             <div className="modal">
               <div className="modal-content">

@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom";
+
 export default function UserManagementDashboard() {
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
+
       {/* Page Header */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-[var(--primary-blue)]">
@@ -8,12 +11,21 @@ export default function UserManagementDashboard() {
         </h1>
 
         <div className="flex gap-3">
-          <button className="bg-[var(--primary-blue)] text-white px-4 py-2 rounded-lg">
+
+          {/* Add User Button */}
+          
+          <Link
+            to="/"
+            className="bg-[var(--primary-blue)] text-white px-4 py-2 rounded-lg"
+          >
             Add New User
-          </button>
+          </Link>
+
+          {/* Export Button */}
           <button className="border border-[var(--primary-blue)] text-[var(--primary-blue)] px-4 py-2 rounded-lg">
             Export Report
           </button>
+
         </div>
       </div>
 
@@ -61,6 +73,7 @@ export default function UserManagementDashboard() {
               <th className="px-4 py-3 text-left">Status</th>
             </tr>
           </thead>
+
           <tbody className="divide-y">
             <tr>
               <td className="px-4 py-3">John Smith</td>
@@ -74,9 +87,10 @@ export default function UserManagementDashboard() {
               </td>
             </tr>
           </tbody>
+
         </table>
       </div>
+
     </div>
   );
 }
-

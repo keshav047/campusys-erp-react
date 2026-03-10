@@ -1,19 +1,26 @@
+import { Link } from "react-router-dom";
+
 export default function UserRole() {
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
+
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-semibold text-[var(--primary-blue)]">
           User Roles Management
         </h1>
 
-        <button className="bg-[var(--primary-blue)] text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-[var(--secondary-blue)]">
+        <Link
+          to="/add-role"
+          className="bg-[var(--primary-blue)] text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-[var(--secondary-blue)]"
+        >
           Add New Role
-        </button>
+        </Link>
       </div>
 
       {/* Card */}
       <div className="bg-white rounded-2xl shadow-sm p-6">
+
         {/* Filters */}
         <div className="flex items-center justify-between mb-6">
           <input
@@ -52,7 +59,7 @@ export default function UserRole() {
             </thead>
 
             <tbody className="divide-y">
-              {/* Row */}
+
               <tr className="hover:bg-gray-50">
                 <td className="px-4 py-4 font-medium">Administrator</td>
                 <td className="px-4 py-4 text-gray-600">
@@ -76,7 +83,6 @@ export default function UserRole() {
                 </td>
               </tr>
 
-              {/* Row */}
               <tr className="hover:bg-gray-50">
                 <td className="px-4 py-4 font-medium">Teacher</td>
                 <td className="px-4 py-4 text-gray-600">
@@ -100,7 +106,6 @@ export default function UserRole() {
                 </td>
               </tr>
 
-              {/* Row */}
               <tr className="hover:bg-gray-50">
                 <td className="px-4 py-4 font-medium">Student</td>
                 <td className="px-4 py-4 text-gray-600">
@@ -123,10 +128,13 @@ export default function UserRole() {
                   </button>
                 </td>
               </tr>
+
             </tbody>
           </table>
         </div>
+
       </div>
+
     </div>
-  )
+  );
 }

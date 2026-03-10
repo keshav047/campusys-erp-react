@@ -27,7 +27,7 @@ export default function Sidebar() {
 
         {/* ✅ Dashboard FIXED */}
         <NavLink
-          to="/dashboard"
+          to="/user-management"
           className={({ isActive }) =>
             `${baseLink} ${isActive ? activeLink : normalLink}`
           }
