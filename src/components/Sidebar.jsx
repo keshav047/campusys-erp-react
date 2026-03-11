@@ -1,126 +1,64 @@
 import { NavLink } from "react-router-dom"
 import { useState } from "react"
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen }) {
   const [openUsers, setOpenUsers] = useState(true)
 
   const baseLink =
-    "flex items-center px-6 py-3 text-sm font-medium transition-all duration-200 relative"
-
+    "flex items-center gap-3 px-6 py-3 text-sm font-medium rounded-md transition-all duration-200"
   const activeLink =
-    "bg-[var(--light-blue)] text-[var(--primary-blue)] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-[var(--accent-gold)]"
-
+    "bg-blue-50 text-blue-700 border-l-4 border-yellow-400"
   const normalLink =
-    "text-gray-600 hover:bg-[var(--light-blue)] hover:text-[var(--primary-blue)]"
+    "text-gray-600 hover:bg-blue-50 hover:text-blue-700"
 
   return (
-    <aside className="w-[280px] bg-white border-r min-h-screen shadow-sm">
-      
-      {/* Header Section */}
-      
-
-      {/* Menu Section */}
-      <div className="py-4">
-        <div className="px-6 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+    <aside
+      className={`
+        fixed top-16 left-0
+        w-[260px] h-[calc(100vh-4rem)]
+        bg-white border-r shadow-sm z-30
+        transform transition-transform duration-300
+        ${isOpen ? "translate-x-0" : "-translate-x-full"}
+        overflow-y-auto
+      `}
+    >
+      <div className="py-6">
+        {/* Title */}
+        <div className="px-6 mb-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">
           Main Menu
         </div>
 
-        {/* ✅ Dashboard FIXED */}
-        <NavLink
-          to="/user-management"
-          className={({ isActive }) =>
-            `${baseLink} ${isActive ? activeLink : normalLink}`
-          }
-        >
-          Dashboard
-        </NavLink>
+        {/* Links */}
+        <NavLink to="/user-management" className={({ isActive }) =>
+          `${baseLink} ${isActive ? activeLink : normalLink}`
+        }>📊 Dashboard</NavLink>
 
-        {/* User Roles */}
-        <NavLink
-          to="/user-role"
-          className={({ isActive }) =>
-            `${baseLink} justify-between ${
-              isActive ? activeLink : normalLink
-            }`
-          }
-        >
-          <span>User Roles</span>
-          <span className="ml-2 bg-[var(--accent-gold)] text-[var(--primary-blue)] text-xs font-semibold px-2 py-0.5 rounded-full">
-            8
-          </span>
-        </NavLink>
+        <NavLink to="/user-role" className={({ isActive }) =>
+          `${baseLink} ${isActive ? activeLink : normalLink}`
+        }>👤 User Roles</NavLink>
 
-        {/* Menu Rights */}
-        <NavLink
-          to="/menu-rights"
-          className={({ isActive }) =>
-            `${baseLink} ${isActive ? activeLink : normalLink}`
-          }
-        >
-          Menu Rights
-        </NavLink>
+        <NavLink to="/menu-rights" className={({ isActive }) =>
+          `${baseLink} ${isActive ? activeLink : normalLink}`
+        }>📂 Menu Rights</NavLink>
 
-        {/* Page Rights */}
-        <NavLink
-          to="/page-rights"
-          className={({ isActive }) =>
-            `${baseLink} ${isActive ? activeLink : normalLink}`
-          }
-        >
-          Page Rights
-        </NavLink>
+        <NavLink to="/page-rights" className={({ isActive }) =>
+          `${baseLink} ${isActive ? activeLink : normalLink}`
+        }>📄 Page Rights</NavLink>
 
-        {/* Users with Submenu */}
+        {/* Users submenu */}
         <button
           onClick={() => setOpenUsers(!openUsers)}
-          className={`${baseLink} w-full text-left flex justify-between ${normalLink}`}
+          className={`${baseLink} w-full justify-between ${normalLink}`}
         >
-          <span>Users</span>
-          <span className="text-xs">
-            {openUsers ? "▲" : "▼"}
-          </span>
+          <span>👥 Users</span>
+          <span className="text-xs">{openUsers ? "▲" : "▼"}</span>
         </button>
 
         {openUsers && (
-          <div className="mt-1 space-y-1">
-            <NavLink
-              to="/user"
-              className={({ isActive }) =>
-                `flex items-center px-10 py-2 text-sm transition ${
-                  isActive
-                    ? "bg-[var(--light-blue)] text-[var(--primary-blue)]"
-                    : "text-gray-500 hover:bg-[var(--light-blue)] hover:text-[var(--primary-blue)]"
-                }`
-              }
-            >
-              Student Users
-            </NavLink>
-
-            <NavLink
-              to="/family-users"
-              className={({ isActive }) =>
-                `flex items-center px-10 py-2 text-sm transition ${
-                  isActive
-                    ? "bg-[var(--light-blue)] text-[var(--primary-blue)]"
-                    : "text-gray-500 hover:bg-[var(--light-blue)] hover:text-[var(--primary-blue)]"
-                }`
-              }
-            >
-              Family Users
-            </NavLink>
-
-            <NavLink
-              to="/employee-users"
-              className={({ isActive }) =>
-                `flex items-center px-10 py-2 text-sm transition ${
-                  isActive
-                    ? "bg-[var(--light-blue)] text-[var(--primary-blue)]"
-                    : "text-gray-500 hover:bg-[var(--light-blue)] hover:text-[var(--primary-blue)]"
-                }`
-              }
-            >
-              Employee Users
-            </NavLink>
+          <div className="ml-6 mt-1 space-y-1 border-l pl-4">
+            <NavLink to="/user" className="block py-2 text-sm text-gray-500 hover:text-blue-700">Student Users</NavLink>
+            <NavLink to="/family-users" className="block py-2 text-sm text-gray-500 hover:text-blue-700">Family Users</NavLink>
+            <NavLink to="/employee-users" className="block py-2 text-sm text-gray-500 hover:text-blue-700">Employee Users</NavLink>
           </div>
         )}
       </div>

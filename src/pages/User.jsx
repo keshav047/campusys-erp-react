@@ -89,9 +89,7 @@ export default function User() {
         <h1 className="text-2xl font-semibold text-[var(--primary-blue)]">
           Student Users
         </h1>
-        <button className="bg-[var(--light-blue)] text-[var(--primary-blue)] px-4 py-2 rounded-lg font-medium">
-          + Add Student
-        </button>
+        
       </div>
 
       <div className="bg-white rounded-2xl shadow p-6">
