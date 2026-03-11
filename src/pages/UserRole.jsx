@@ -1,10 +1,43 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function UserRole() {
+  // 2000 dummy roles for example
+  const allRoles = Array.from({ length: 2000 }, (_, i) => ({
+    id: i + 1,
+    name: `Role ${i + 1}`,
+    description: "Role description for ERP system",
+    users: Math.floor(Math.random() * 100),
+    permissions: "Limited Permissions",
+    date: "Jan 15, 2023",
+    status: "Active",
+  }));
+
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Filter roles based on search input
+  const filteredRoles = allRoles.filter((role) =>
+    role.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  // Logic for pagination
+  const itemsPerPage = 500; // 500 rows per page
+  const totalPages = Math.ceil(filteredRoles.length / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentRoles = filteredRoles.slice(startIndex, startIndex + itemsPerPage);
+
+  const handlePrev = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+  const handleNext = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-
-      {/* Header */}
+      {/* Page header */}
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-semibold text-[var(--primary-blue)]">
           User Roles Management
@@ -18,14 +51,15 @@ export default function UserRole() {
         </Link>
       </div>
 
-      {/* Card */}
-      <div className="bg-white rounded-2xl shadow-sm p-6">
-
+      {/* Table container */}
+      <div className="bg-white rounded-2xl shadow-sm p-6 flex flex-col flex-1">
         {/* Filters */}
         <div className="flex items-center justify-between mb-6">
           <input
             type="text"
             placeholder="Search user roles..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             className="w-80 px-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
           />
 
@@ -43,11 +77,11 @@ export default function UserRole() {
           </div>
         </div>
 
-        {/* Table */}
+        {/* Table WITHOUT internal scroll */}
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead>
-              <tr className="bg-[var(--light-blue)] text-[var(--primary-blue)]">
+            <thead className="sticky top-0 z-10 bg-[var(--light-blue)] text-[var(--primary-blue)]">
+              <tr>
                 <th className="text-left px-4 py-3">Role Name</th>
                 <th className="text-left px-4 py-3">Description</th>
                 <th className="text-left px-4 py-3">Users</th>
@@ -59,82 +93,67 @@ export default function UserRole() {
             </thead>
 
             <tbody className="divide-y">
-
-              <tr className="hover:bg-gray-50">
-                <td className="px-4 py-4 font-medium">Administrator</td>
-                <td className="px-4 py-4 text-gray-600">
-                  Full system access and control
-                </td>
-                <td className="px-4 py-4">5</td>
-                <td className="px-4 py-4">All Permissions</td>
-                <td className="px-4 py-4">Jan 15, 2023</td>
-                <td className="px-4 py-4">
-                  <span className="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-600">
-                    Active
-                  </span>
-                </td>
-                <td className="px-4 py-4 flex gap-2">
-                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white">
-                    ✎
-                  </button>
-                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-600 hover:text-white">
-                    🗑
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="hover:bg-gray-50">
-                <td className="px-4 py-4 font-medium">Teacher</td>
-                <td className="px-4 py-4 text-gray-600">
-                  Access to academic and student management
-                </td>
-                <td className="px-4 py-4">42</td>
-                <td className="px-4 py-4">Limited Permissions</td>
-                <td className="px-4 py-4">Feb 10, 2023</td>
-                <td className="px-4 py-4">
-                  <span className="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-600">
-                    Active
-                  </span>
-                </td>
-                <td className="px-4 py-4 flex gap-2">
-                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white">
-                    ✎
-                  </button>
-                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-600 hover:text-white">
-                    🗑
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="hover:bg-gray-50">
-                <td className="px-4 py-4 font-medium">Student</td>
-                <td className="px-4 py-4 text-gray-600">
-                  Access to personal academic information
-                </td>
-                <td className="px-4 py-4">850</td>
-                <td className="px-4 py-4">Restricted Permissions</td>
-                <td className="px-4 py-4">Jan 20, 2023</td>
-                <td className="px-4 py-4">
-                  <span className="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-600">
-                    Active
-                  </span>
-                </td>
-                <td className="px-4 py-4 flex gap-2">
-                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white">
-                    ✎
-                  </button>
-                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-600 hover:text-white">
-                    🗑
-                  </button>
-                </td>
-              </tr>
-
+              {currentRoles.map((role) => (
+                <tr key={role.id} className="hover:bg-gray-50">
+                  <td className="px-4 py-4 font-medium">{role.name}</td>
+                  <td className="px-4 py-4 text-gray-600">{role.description}</td>
+                  <td className="px-4 py-4">{role.users}</td>
+                  <td className="px-4 py-4">{role.permissions}</td>
+                  <td className="px-4 py-4">{role.date}</td>
+                  <td className="px-4 py-4">
+                    <span className="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-600">
+                      {role.status}
+                    </span>
+                  </td>
+                  <td className="px-4 py-4 flex gap-2">
+                    <button className="w-9 h-9 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white">
+                      ✎
+                    </button>
+                    <button className="w-9 h-9 flex items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-600 hover:text-white">
+                      🗑
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
 
-      </div>
+        {/* Pagination */}
+        <div className="flex justify-between items-center mt-4 text-sm flex-wrap gap-2">
+          <p className="text-gray-500">
+            Showing {startIndex + 1} to {startIndex + currentRoles.length} of {filteredRoles.length} roles
+          </p>
 
+          <div className="flex gap-2 flex-wrap">
+            <button
+              onClick={handlePrev}
+              disabled={currentPage === 1}
+              className={`px-3 py-1 border rounded ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-100"}`}
+            >
+              Prev
+            </button>
+
+            {[...Array(totalPages)].map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentPage(i + 1)}
+                className={`px-3 py-1 rounded ${currentPage === i + 1 ? "bg-[var(--primary-blue)] text-white" : "border hover:bg-gray-100"}`}
+              >
+                {i + 1}
+              </button>
+            ))}
+
+            <button
+              onClick={handleNext}
+              disabled={currentPage === totalPages}
+              className={`px-3 py-1 border rounded ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-100"}`}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

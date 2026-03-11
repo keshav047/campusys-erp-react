@@ -6,7 +6,8 @@ import ForgotPassword from "../pages/ForgotPassword"
 
 import UserManagementDashboard from "../pages/UserManagementDashboard"
 import UserRole from "../pages/UserRole"
-import User from "../pages/User"
+import User from "../pages/Users/User"
+import FamilyUsers from "../pages/Users/FamilyUsers"
 import MenuRights from "../pages/MenuRights"
 import CreatingNewRole from "../pages/CreatingNewRole"
 import SuperAdminDashboard from "../pages/SuperAdminDashboard"
@@ -29,6 +30,7 @@ export default function AppRoutes() {
         <Route path="user-management" element={<UserManagementDashboard />} />
         <Route path="user-role" element={<UserRole />} />
         <Route path="user" element={<User />} />
+        <Route path="family-users" element={<FamilyUsers />} />
         <Route path="menu-rights" element={<MenuRights />} />
         <Route path="create-role" element={<CreatingNewRole />} />
         <Route path="add-role" element={<AddRole />} />
