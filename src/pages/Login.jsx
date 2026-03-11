@@ -90,13 +90,7 @@ export default function Login() {
             </button>
           </form>
 
-          {showModal && (
-            <div className="modal">
-              <div className="modal-content">
-                <h3>Login Successful ✅</h3>
-              </div>
-            </div>
-          )}
+         
         </div>
       </div>
     </div>
