@@ -2,27 +2,21 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function UserRole() {
-  // 2000 dummy roles for example
   const allRoles = Array.from({ length: 2000 }, (_, i) => ({
     id: i + 1,
     name: `Role ${i + 1}`,
     description: "Role description for ERP system",
-    users: Math.floor(Math.random() * 100),
-    permissions: "Limited Permissions",
     date: "Jan 15, 2023",
-    status: "Active",
   }));
 
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Filter roles based on search input
   const filteredRoles = allRoles.filter((role) =>
     role.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  // Logic for pagination
-  const itemsPerPage = 500; // 500 rows per page
+  const itemsPerPage = 500;
   const totalPages = Math.ceil(filteredRoles.length / itemsPerPage);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -31,13 +25,14 @@ export default function UserRole() {
   const handlePrev = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
+
   const handleNext = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-      {/* Page header */}
+      {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-semibold text-[var(--primary-blue)]">
           User Roles Management
@@ -51,9 +46,8 @@ export default function UserRole() {
         </Link>
       </div>
 
-      {/* Table container */}
       <div className="bg-white rounded-2xl shadow-sm p-6 flex flex-col flex-1">
-        {/* Filters */}
+        {/* Search */}
         <div className="flex items-center justify-between mb-6">
           <input
             type="text"
@@ -62,32 +56,16 @@ export default function UserRole() {
             onChange={(e) => setSearch(e.target.value)}
             className="w-80 px-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
           />
-
-          <div className="flex gap-3">
-            <select className="px-4 py-2 border rounded-lg text-sm text-gray-600">
-              <option>All Status</option>
-              <option>Active</option>
-              <option>Inactive</option>
-            </select>
-
-            <select className="px-4 py-2 border rounded-lg text-sm text-gray-600">
-              <option>Sort by Name</option>
-              <option>Sort by Date</option>
-            </select>
-          </div>
         </div>
 
-        {/* Table WITHOUT internal scroll */}
+        {/* Table */}
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="sticky top-0 z-10 bg-[var(--light-blue)] text-[var(--primary-blue)]">
               <tr>
                 <th className="text-left px-4 py-3">Role Name</th>
                 <th className="text-left px-4 py-3">Description</th>
-                <th className="text-left px-4 py-3">Users</th>
-                <th className="text-left px-4 py-3">Permissions</th>
                 <th className="text-left px-4 py-3">Created Date</th>
-                <th className="text-left px-4 py-3">Status</th>
                 <th className="text-left px-4 py-3">Actions</th>
               </tr>
             </thead>
@@ -97,14 +75,8 @@ export default function UserRole() {
                 <tr key={role.id} className="hover:bg-gray-50">
                   <td className="px-4 py-4 font-medium">{role.name}</td>
                   <td className="px-4 py-4 text-gray-600">{role.description}</td>
-                  <td className="px-4 py-4">{role.users}</td>
-                  <td className="px-4 py-4">{role.permissions}</td>
                   <td className="px-4 py-4">{role.date}</td>
-                  <td className="px-4 py-4">
-                    <span className="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-600">
-                      {role.status}
-                    </span>
-                  </td>
+
                   <td className="px-4 py-4 flex gap-2">
                     <button className="w-9 h-9 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white">
                       ✎
@@ -138,7 +110,11 @@ export default function UserRole() {
               <button
                 key={i}
                 onClick={() => setCurrentPage(i + 1)}
-                className={`px-3 py-1 rounded ${currentPage === i + 1 ? "bg-[var(--primary-blue)] text-white" : "border hover:bg-gray-100"}`}
+                className={`px-3 py-1 rounded ${
+                  currentPage === i + 1
+                    ? "bg-[var(--primary-blue)] text-white"
+                    : "border hover:bg-gray-100"
+                }`}
               >
                 {i + 1}
               </button>
@@ -147,7 +123,11 @@ export default function UserRole() {
             <button
               onClick={handleNext}
               disabled={currentPage === totalPages}
-              className={`px-3 py-1 border rounded ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-100"}`}
+              className={`px-3 py-1 border rounded ${
+                currentPage === totalPages
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:bg-gray-100"
+              }`}
             >
               Next
             </button>
