@@ -5,7 +5,7 @@ const Dashboard = () => {
 
   const modules = [
     { name: "User Management", icon: "🎓", description: "Manage user accounts", link: "/user-management" },
-    { name: "Academics", icon: "📘", description: "Curriculum & courses" },
+    { name: "Academi", icon: "📘", description: "Curriculum & courses" },
     { name: "Attendance", icon: "✅", description: "Track student presence" },
     { name: "Performance", icon: "📊", description: "Grades & analytics" },
     { name: "Timetable", icon: "📅", description: "Class schedules" },
