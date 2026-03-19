@@ -20,6 +20,10 @@ import AddRole from "../pages/AddRole"
 import AddClass from "../pages/student management/AddClass"
 import AcademicYears from "../pages/student management/AcademicYears";
 import AddStudent from "../pages/student management/AddStudent";
+import AddStudentGroup from "../pages/student management/AddStudentGroup";
+import AddTabsandSubtabs from "../pages/student management/AddTabsandSubtabs";
+import ClassesSections from "../pages/student management/ClassesSections";
+import ProfilePage from "../pages/student management/ProfilePage";
 export default function AppRoutes() {
   return (
     <Routes>
@@ -52,6 +56,10 @@ export default function AppRoutes() {
         <Route path="add-class" element={<AddClass />} />
         <Route path="academic-years" element={<AcademicYears />} />
         <Route path="add-student" element={<AddStudent />} />
+        <Route path="add-student-group" element={<AddStudentGroup />} />
+        <Route path="add-Tabsand-Subtabs" element={<AddTabsandSubtabs />} />
+        <Route path="classes-sections" element={<ClassesSections/>} />
+        <Route path="profile-page" element={<ProfilePage/>} />
       </Route>
 
       <Route path="*" element={<Navigate to="/login" replace />} />

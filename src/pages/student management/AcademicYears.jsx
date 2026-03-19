@@ -25,17 +25,17 @@ export default function AcademicYears() {
     const s = new Date(start);
     const e = new Date(end);
 
+    if (!start || !end) return "upcoming";
     if (today < s) return "upcoming";
     if (today > e) return "completed";
     return "active";
   };
 
   const addRow = () => {
-    const id = Date.now();
     setYears([
       ...years,
       {
-        id,
+        id: Date.now(),
         shortName: "",
         name: "",
         startDate: "",
@@ -53,14 +53,10 @@ export default function AcademicYears() {
     const updated = years.map((y) => {
       if (y.id === id) {
         const updatedRow = { ...y, [field]: value };
-
-        if (field === "startDate" || field === "endDate") {
-          updatedRow.status = getStatus(
-            updatedRow.startDate,
-            updatedRow.endDate
-          );
-        }
-
+        updatedRow.status = getStatus(
+          updatedRow.startDate,
+          updatedRow.endDate
+        );
         return updatedRow;
       }
       return y;
@@ -81,101 +77,165 @@ export default function AcademicYears() {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-4 md:p-6 bg-gray-50 min-h-screen">
+
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-blue-900">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
+        <h1 className="text-xl md:text-2xl font-bold text-blue-900">
           Academic Years
         </h1>
 
         <button
           onClick={saveAll}
-          className="bg-blue-700 text-white px-4 py-2 rounded-lg"
+          className="bg-blue-700 hover:bg-blue-800 text-white px-5 py-2 rounded-lg w-full md:w-auto"
         >
           Save All Changes
         </button>
       </div>
 
-      {/* Table */}
-      <div className="bg-white rounded-xl shadow p-5">
-        <table className="w-full border">
-          <thead className="bg-blue-50">
-            <tr>
-              <th className="p-3 text-left">Short Name</th>
-              <th className="p-3 text-left">Name</th>
-              <th className="p-3">Start Date</th>
-              <th className="p-3">End Date</th>
-              <th className="p-3">Status</th>
-              <th className="p-3">Action</th>
-            </tr>
-          </thead>
+      {/* Card */}
+      <div className="bg-white rounded-xl shadow p-4 md:p-6">
 
-          <tbody>
-            {years.map((y) => (
-              <tr key={y.id} className="border-t">
-                <td className="p-2">
-                  <input
-                    value={y.shortName}
-                    onChange={(e) =>
-                      handleChange(y.id, "shortName", e.target.value)
-                    }
-                    className="border p-2 w-full"
-                  />
-                </td>
+        {/* Desktop Table */}
+        <div className="hidden md:block overflow-x-auto">
+          <table className="w-full border rounded-lg overflow-hidden">
+            <thead className="bg-blue-50">
+              <tr>
+                <th className="p-3 text-left">Short Name</th>
+                <th className="p-3 text-left">Name</th>
+                <th className="p-3">Start Date</th>
+                <th className="p-3">End Date</th>
+                <th className="p-3">Status</th>
+                <th className="p-3">Action</th>
+              </tr>
+            </thead>
 
-                <td className="p-2">
-                  <input
-                    value={y.name}
-                    onChange={(e) =>
-                      handleChange(y.id, "name", e.target.value)
-                    }
-                    className="border p-2 w-full"
-                  />
-                </td>
+            <tbody>
+              {years.map((y) => (
+                <tr key={y.id} className="border-t">
+                  <td className="p-2">
+                    <input
+                      value={y.shortName}
+                      onChange={(e) =>
+                        handleChange(y.id, "shortName", e.target.value)
+                      }
+                      className="border p-2 w-full rounded"
+                    />
+                  </td>
 
-                <td className="p-2">
-                  <input
-                    type="date"
-                    value={y.startDate}
-                    onChange={(e) =>
-                      handleChange(y.id, "startDate", e.target.value)
-                    }
-                    className="border p-2"
-                  />
-                </td>
+                  <td className="p-2">
+                    <input
+                      value={y.name}
+                      onChange={(e) =>
+                        handleChange(y.id, "name", e.target.value)
+                      }
+                      className="border p-2 w-full rounded"
+                    />
+                  </td>
 
-                <td className="p-2">
-                  <input
-                    type="date"
-                    value={y.endDate}
-                    onChange={(e) =>
-                      handleChange(y.id, "endDate", e.target.value)
-                    }
-                    className="border p-2"
-                  />
-                </td>
+                  <td className="p-2">
+                    <input
+                      type="date"
+                      value={y.startDate}
+                      onChange={(e) =>
+                        handleChange(y.id, "startDate", e.target.value)
+                      }
+                      className="border p-2 rounded"
+                    />
+                  </td>
 
-                <td className="p-2 text-center">
-                  <span className={statusColor(y.status)}>
-                    {y.status}
-                  </span>
-                </td>
+                  <td className="p-2">
+                    <input
+                      type="date"
+                      value={y.endDate}
+                      onChange={(e) =>
+                        handleChange(y.id, "endDate", e.target.value)
+                      }
+                      className="border p-2 rounded"
+                    />
+                  </td>
 
-       <td className="px-4 py-4 flex gap-2">
-                    
-                    <button className="w-9 h-9 flex items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-600 hover:text-white">
+                  <td className="p-2 text-center">
+                    <span className={statusColor(y.status)}>
+                      {y.status}
+                    </span>
+                  </td>
+
+                  <td className="p-2 text-center">
+                    <button
+                      onClick={() => removeRow(y.id)}
+                      className="bg-red-100 text-red-600 px-3 py-1 rounded hover:bg-red-600 hover:text-white"
+                    >
                       🗑
                     </button>
                   </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Mobile View */}
+        <div className="md:hidden space-y-4">
+          {years.map((y) => (
+            <div key={y.id} className="border rounded-lg p-4 shadow-sm">
+
+              <input
+                value={y.shortName}
+                placeholder="Short Name"
+                onChange={(e) =>
+                  handleChange(y.id, "shortName", e.target.value)
+                }
+                className="border p-2 w-full mb-2 rounded"
+              />
+
+              <input
+                value={y.name}
+                placeholder="Name"
+                onChange={(e) =>
+                  handleChange(y.id, "name", e.target.value)
+                }
+                className="border p-2 w-full mb-2 rounded"
+              />
+
+              <input
+                type="date"
+                value={y.startDate}
+                onChange={(e) =>
+                  handleChange(y.id, "startDate", e.target.value)
+                }
+                className="border p-2 w-full mb-2 rounded"
+              />
+
+              <input
+                type="date"
+                value={y.endDate}
+                onChange={(e) =>
+                  handleChange(y.id, "endDate", e.target.value)
+                }
+                className="border p-2 w-full mb-2 rounded"
+              />
+
+              <div className="flex justify-between items-center mt-2">
+                <span className={statusColor(y.status)}>
+                  {y.status}
+                </span>
+
+                <button
+                  onClick={() => removeRow(y.id)}
+                  className="bg-red-500 text-white px-3 py-1 rounded"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
 
         {/* Add Row */}
         <button
           onClick={addRow}
-          className="mt-4 bg-green-600 text-white px-4 py-2 rounded"
+          className="mt-4 bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded w-full md:w-auto"
         >
           + Add Row
         </button>

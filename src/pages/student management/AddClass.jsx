@@ -16,12 +16,10 @@ export default function AddClass() {
     { id: 2, name: "Section B", capacity: 35 },
   ]);
 
-  // handle input
   const handleChange = (e) => {
     setClassData({ ...classData, [e.target.id]: e.target.value });
   };
 
-  // validation
   const validateStep1 = () => {
     if (!classData.name) return alert("Enter class name");
     if (!classData.sequence) return alert("Enter sequence");
@@ -29,12 +27,10 @@ export default function AddClass() {
     return true;
   };
 
-  // next
   const handleNext = () => {
     if (validateStep1()) setStep(2);
   };
 
-  // add section
   const addSection = () => {
     setSections([
       ...sections,
@@ -46,12 +42,10 @@ export default function AddClass() {
     ]);
   };
 
-  // remove section
   const removeSection = (id) => {
     setSections(sections.filter((s) => s.id !== id));
   };
 
-  // update section
   const updateSection = (id, field, value) => {
     setSections(
       sections.map((s) =>
@@ -60,7 +54,6 @@ export default function AddClass() {
     );
   };
 
-  // save
   const handleSave = () => {
     if (sections.length === 0) {
       alert("Add at least one section");
@@ -74,18 +67,20 @@ export default function AddClass() {
   };
 
   return (
-    <div className="p-6 w-full">
-      <h1 className="text-2xl font-bold text-blue-800 mb-6">
+    <div className="min-h-screen bg-gray-50 p-4 md:p-6">
+
+      {/* Title */}
+      <h1 className="text-xl md:text-2xl font-bold text-blue-800 mb-6">
         Add New Class
       </h1>
 
       {/* Steps */}
       <div className="flex justify-center mb-6">
-        <div className="flex gap-10">
-          <div className={step === 1 ? "text-blue-700 font-bold" : ""}>
+        <div className="flex items-center gap-4 md:gap-10 text-sm md:text-base">
+          <div className={step === 1 ? "text-blue-700 font-bold" : "text-gray-400"}>
             1. Class Details
           </div>
-          <div className={step === 2 ? "text-blue-700 font-bold" : ""}>
+          <div className={step === 2 ? "text-blue-700 font-bold" : "text-gray-400"}>
             2. Sections
           </div>
         </div>
@@ -93,32 +88,36 @@ export default function AddClass() {
 
       {/* STEP 1 */}
       {step === 1 && (
-        <div className="bg-white p-6 rounded shadow">
-          <div className="grid grid-cols-2 gap-4">
+        <div className="bg-white p-4 md:p-6 rounded-xl shadow max-w-5xl mx-auto">
+
+          {/* Form Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
             <input
               id="name"
               placeholder="Class Name"
-              className="border p-2 rounded"
+              className="border p-2 rounded w-full"
               onChange={handleChange}
             />
+
             <input
               id="sequence"
               type="number"
               placeholder="Sequence"
-              className="border p-2 rounded"
+              className="border p-2 rounded w-full"
               onChange={handleChange}
             />
 
             <input
               id="shortName"
               placeholder="Short Name"
-              className="border p-2 rounded"
+              className="border p-2 rounded w-full"
               onChange={handleChange}
             />
 
             <select
               id="previousClass"
-              className="border p-2 rounded"
+              className="border p-2 rounded w-full"
               onChange={handleChange}
             >
               <option value="">Previous Class</option>
@@ -127,6 +126,7 @@ export default function AddClass() {
             </select>
           </div>
 
+          {/* Description */}
           <textarea
             id="description"
             placeholder="Description"
@@ -134,10 +134,11 @@ export default function AddClass() {
             onChange={handleChange}
           />
 
+          {/* Button */}
           <div className="flex justify-end mt-6">
             <button
               onClick={handleNext}
-              className="bg-blue-700 text-white px-4 py-2 rounded"
+              className="bg-blue-700 hover:bg-blue-800 text-white px-5 py-2 rounded"
             >
               Save & Next →
             </button>
@@ -147,69 +148,111 @@ export default function AddClass() {
 
       {/* STEP 2 */}
       {step === 2 && (
-        <div className="bg-white p-6 rounded shadow">
-          <table className="w-full border">
-            <thead>
-              <tr className="bg-blue-50">
-                <th className="p-2">Section</th>
-                <th className="p-2">Capacity</th>
-                <th className="p-2">Action</th>
-              </tr>
-            </thead>
+        <div className="bg-white p-4 md:p-6 rounded-xl shadow max-w-5xl mx-auto">
 
-            <tbody>
-              {sections.map((s) => (
-                <tr key={s.id}>
-                  <td className="p-2">
-                    <input
-                      value={s.name}
-                      onChange={(e) =>
-                        updateSection(s.id, "name", e.target.value)
-                      }
-                      className="border p-1 rounded w-full"
-                    />
-                  </td>
-                  <td className="p-2">
-                    <input
-                      type="number"
-                      value={s.capacity}
-                      onChange={(e) =>
-                        updateSection(s.id, "capacity", e.target.value)
-                      }
-                      className="border p-1 rounded w-full"
-                    />
-                  </td>
-                  <td className="p-2">
-                    <button
-                      onClick={() => removeSection(s.id)}
-                      className="bg-red-500 text-white px-3 py-1 rounded"
-                    >
-                      Remove
-                    </button>
-                  </td>
+          {/* Desktop Table */}
+          <div className="hidden md:block overflow-x-auto">
+            <table className="w-full border rounded-lg overflow-hidden">
+              <thead>
+                <tr className="bg-blue-50">
+                  <th className="p-3 text-left">Section</th>
+                  <th className="p-3 text-left">Capacity</th>
+                  <th className="p-3 text-left">Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
 
+              <tbody>
+                {sections.map((s) => (
+                  <tr key={s.id} className="border-t">
+                    <td className="p-2">
+                      <input
+                        value={s.name}
+                        onChange={(e) =>
+                          updateSection(s.id, "name", e.target.value)
+                        }
+                        className="border p-2 rounded w-full"
+                      />
+                    </td>
+
+                    <td className="p-2">
+                      <input
+                        type="number"
+                        value={s.capacity}
+                        onChange={(e) =>
+                          updateSection(s.id, "capacity", e.target.value)
+                        }
+                        className="border p-2 rounded w-full"
+                      />
+                    </td>
+
+                    <td className="p-2">
+                      <button
+                        onClick={() => removeSection(s.id)}
+                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile Card View */}
+          <div className="md:hidden space-y-4">
+            {sections.map((s) => (
+              <div key={s.id} className="border p-4 rounded-lg shadow-sm">
+
+                <input
+                  value={s.name}
+                  onChange={(e) =>
+                    updateSection(s.id, "name", e.target.value)
+                  }
+                  className="border p-2 rounded w-full mb-2"
+                  placeholder="Section Name"
+                />
+
+                <input
+                  type="number"
+                  value={s.capacity}
+                  onChange={(e) =>
+                    updateSection(s.id, "capacity", e.target.value)
+                  }
+                  className="border p-2 rounded w-full mb-2"
+                  placeholder="Capacity"
+                />
+
+                <button
+                  onClick={() => removeSection(s.id)}
+                  className="bg-red-500 text-white px-3 py-1 rounded w-full"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {/* Add Button */}
           <button
             onClick={addSection}
-            className="mt-4 bg-green-600 text-white px-4 py-2 rounded"
+            className="mt-4 bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded w-full md:w-auto"
           >
             + Add Section
           </button>
 
-          <div className="flex justify-between mt-6">
+          {/* Bottom Buttons */}
+          <div className="flex flex-col md:flex-row justify-between gap-3 mt-6">
             <button
               onClick={() => setStep(1)}
-              className="border px-4 py-2 rounded"
+              className="border px-5 py-2 rounded w-full md:w-auto"
             >
               ← Back
             </button>
 
             <button
               onClick={handleSave}
-              className="bg-green-600 text-white px-4 py-2 rounded"
+              className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded w-full md:w-auto"
             >
               Save & Close
             </button>

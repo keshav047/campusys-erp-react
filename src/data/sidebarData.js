@@ -49,10 +49,14 @@ export const sidebarData = {
           icon: "🔧",
           children: [
             { name: "Tabs and Sub Tabs", path: "/tabs-sub-tabs" },
-            { name: "Add Tab", path: "/add-tab" },
-            { name: "Profile Page Setup", path: "/profile-page-setup" },
+            { name: "Add Tab", path: "/add-Tabsand-Subtabs" },
+            { name: "Profile Page Setup", path: "/profile-page" },
             { name: "User Defined Fields", path: "/user-defined-fields" },
-            { name: "Classes and Sections", path: "/add-class" }
+            { name: "Classes and Sections", path: "/add-class" },
+             { name: "Student Groups", path: "/student-groups" },
+  { name: "Add Student Group", path: "/add-student-group" },
+  { name: "Academic Years", path: "/academic-years" },
+  { name: "Religions", path: "/religions" },
           ]
         }
       ]

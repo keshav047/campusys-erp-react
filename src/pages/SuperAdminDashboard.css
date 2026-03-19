@@ -303,3 +303,86 @@
     gap: 18px;
   }
 }
+/* =======================
+   RESPONSIVE FIX (SAFE)
+======================= */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr; /* left-right stack */
+  }
+
+  .modules-grid {
+    grid-template-columns: repeat(2, 1fr); /* 3 → 2 */
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .dashboard-wrapper {
+    padding: 20px;
+  }
+
+  .welcome-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .welcome-text h1 {
+    font-size: 22px;
+  }
+
+  .school-icon {
+    font-size: 35px;
+  }
+
+  .modules-grid {
+    grid-template-columns: 1fr; /* full width cards */
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .communication-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .calendar-event {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+
+  .dashboard-wrapper {
+    padding: 15px;
+  }
+
+  .welcome-banner {
+    padding: 25px;
+  }
+
+  .welcome-text h1 {
+    font-size: 18px;
+  }
+
+  .card-header h2 {
+    font-size: 16px;
+  }
+
+  .module-card {
+    padding: 18px;
+  }
+
+  .stat-box h3 {
+    font-size: 20px;
+  }
+}
