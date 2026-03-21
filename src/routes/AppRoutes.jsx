@@ -24,6 +24,13 @@ import AddStudentGroup from "../pages/student management/AddStudentGroup";
 import AddTabsandSubtabs from "../pages/student management/AddTabsandSubtabs";
 import ClassesSections from "../pages/student management/ClassesSections";
 import ProfilePage from "../pages/student management/ProfilePage";
+import SISDashboard from "../pages/student management/SISDashboard";
+import GroupParticipants from "../pages/student management/GroupParticipants";
+import StudentGroups from "../pages/student management/StudentGroups";
+import StudentProfiles from "../pages/student management/StudentProfiles";
+import TabsandSubtabs from "../pages/student management/TabsandSubtabs";
+import UserDefinedFields from "../pages/student management/UserDefinedFields";
+import Religions from "../pages/student management/Religions";
 export default function AppRoutes() {
   return (
     <Routes>
@@ -60,6 +67,13 @@ export default function AppRoutes() {
         <Route path="add-Tabsand-Subtabs" element={<AddTabsandSubtabs />} />
         <Route path="classes-sections" element={<ClassesSections/>} />
         <Route path="profile-page" element={<ProfilePage/>} />
+        <Route path="SIS-Dashboard" element={<SISDashboard/>} />
+        <Route path="group-participants" element={<GroupParticipants/>} />
+        <Route path="student-groups" element={<StudentGroups/>} />
+        <Route path="student-profiles" element={<StudentProfiles/>} />
+        <Route path="tabsand-subtabs" element={<TabsandSubtabs/>} />
+        <Route path="user-defined-fields" element={<UserDefinedFields/>} />
+        <Route path="religions" element={<Religions/>} />
       </Route>
 
       <Route path="*" element={<Navigate to="/login" replace />} />

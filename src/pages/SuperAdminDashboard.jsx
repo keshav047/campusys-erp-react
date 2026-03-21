@@ -6,7 +6,7 @@ const SuperAdminDashboard = () => {
 
   const modules = [
     { icon: "👥", title: "User Management", desc: "Manage user accounts", link: "/user-management" },
-    { icon: "🎓", title: "Student Management", desc: "Manage student profiles and records", link: "/academic-years" },
+    { icon: "🎓", title: "Student Management", desc: "Manage student profiles and records", link: "/SIS-Dashboard" },
     { icon: "✅", title: "Attendance", desc: "Track student presence" },
     { icon: "📈", title: "Performance", desc: "Grades & analytics" },
     { icon: "📅", title: "Timetable", desc: "Class schedules" },

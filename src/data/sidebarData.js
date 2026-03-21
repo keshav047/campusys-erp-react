@@ -19,7 +19,7 @@ export const sidebarData = {
     {
       section: "STUDENT MANAGEMENT",
       items: [
-        { name: "Dashboard", path: "/academic-years", icon: "📊" },
+        { name: "Dashboard", path: "/SIS-Dashboard", icon: "📊" },
         { name: "Student Profiles", path: "/student-profiles", icon: "🪪" },
         { name: "Add Student", path: "/add-student", icon: "➕" },
 
@@ -48,13 +48,14 @@ export const sidebarData = {
           name: "Setup Options",
           icon: "🔧",
           children: [
-            { name: "Tabs and Sub Tabs", path: "/tabs-sub-tabs" },
+            { name: "Tabs and Sub Tabs", path: "/tabsand-subtabs" },
             { name: "Add Tab", path: "/add-Tabsand-Subtabs" },
             { name: "Profile Page Setup", path: "/profile-page" },
             { name: "User Defined Fields", path: "/user-defined-fields" },
             { name: "Classes and Sections", path: "/add-class" },
              { name: "Student Groups", path: "/student-groups" },
   { name: "Add Student Group", path: "/add-student-group" },
+  { name: "Group Participants", path: "/group-participants" },
   { name: "Academic Years", path: "/academic-years" },
   { name: "Religions", path: "/religions" },
           ]
