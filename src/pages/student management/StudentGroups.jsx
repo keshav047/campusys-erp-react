@@ -62,6 +62,11 @@ export default function StudentGroups() {
     <FaPlus /> Add Group
   </button>
 </Link>
+<Link to="/group-participants" style={{ textDecoration: "none" }}>
+  <button style={btnPrimary}>
+    <FaPlus /> Group Participants
+  </button>
+</Link>
         </div>
       </div>
 

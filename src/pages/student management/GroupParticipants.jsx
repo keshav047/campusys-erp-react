@@ -109,14 +109,12 @@ export default function GroupParticipants() {
 
                   <td className="class">{p.classSection}</td>
 
-                  <td>
-                    <button
-                      className="remove-btn"
-                      onClick={() => removeParticipant(p.id)}
-                    >
-                      Remove
-                    </button>
-                  </td>
+                  <td className="px-4 py-4 flex gap-2">
+                  
+                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-600 hover:text-white">
+                    🗑
+                  </button>
+                </td>
                 </tr>
               ))}
             </tbody>

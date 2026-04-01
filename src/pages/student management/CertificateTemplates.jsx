@@ -66,10 +66,14 @@ export default function CertificateTemplates() {
 
                     <td>{item.date}</td>
 
-                    <td>
-                      <button style={styles.editBtn}>Edit</button>
-                      <button style={styles.deleteBtn}>Delete</button>
-                    </td>
+                    <td className="px-4 py-4 flex gap-2">
+                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white">
+                    ✎
+                  </button>
+                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-600 hover:text-white">
+                    🗑
+                  </button>
+                </td>
                   </tr>
                 ))}
               </tbody>

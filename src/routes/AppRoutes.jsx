@@ -37,6 +37,7 @@ import Promotions from "../pages/student management/Promotions";
 import SectionChange from "../pages/student management/SectionChange";
 import TransferCertificate from "../pages/student management/Transfer Certificate";
 import CertificateTemplates from "../pages/student management/CertificateTemplates";
+import StudentCertificates from "../pages/student management/Student Certificates";
 export default function AppRoutes() {
   return (
     <Routes>
@@ -86,6 +87,7 @@ export default function AppRoutes() {
         <Route path="section-Change" element={<SectionChange/>} />
         <Route path="transfer-certificate" element={<TransferCertificate/>} />
         <Route path="Certificate-Templates" element={<CertificateTemplates/>} />
+        <Route path="Student-Certificates" element={<StudentCertificates/>} />
       </Route>
 
       <Route path="*" element={<Navigate to="/login" replace />} />

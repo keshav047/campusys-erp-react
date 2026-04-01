@@ -2,14 +2,7 @@ import { useState } from "react";
 
 export default function AcademicYears() {
   const [years, setYears] = useState([
-    {
-      id: 1,
-      shortName: "2023-24",
-      name: "Academic Year 2023-2024",
-      startDate: "2023-04-01",
-      endDate: "2024-03-31",
-      status: "active",
-    },
+  
     {
       id: 2,
       shortName: "2022-23",
@@ -17,6 +10,14 @@ export default function AcademicYears() {
       startDate: "2022-04-01",
       endDate: "2023-03-31",
       status: "completed",
+    },
+    {
+      id: 1,
+      shortName: "2023-24",
+      name: "Academic Year 2023-2024",
+      startDate: "2023-04-01",
+      endDate: "2024-03-31",
+      status: "active",
     },
   ]);
 
@@ -31,18 +32,43 @@ export default function AcademicYears() {
     return "active";
   };
 
+  /* ✅ AUTO YEAR LOGIC ADDED HERE */
   const addRow = () => {
-    setYears([
-      ...years,
-      {
-        id: Date.now(),
-        shortName: "",
-        name: "",
-        startDate: "",
-        endDate: "",
-        status: "upcoming",
-      },
-    ]);
+    let lastYear = years[0];
+
+    if (years.length > 0) {
+      // latest year find karo
+      lastYear = years.reduce((max, curr) =>
+        new Date(curr.startDate) > new Date(max.startDate)
+          ? curr
+          : max
+      );
+    }
+
+    let nextStartYear;
+
+    if (lastYear && lastYear.startDate) {
+      nextStartYear =
+        new Date(lastYear.startDate).getFullYear() + 1;
+    } else {
+      nextStartYear = new Date().getFullYear();
+    }
+
+    const nextEndYear = nextStartYear + 1;
+
+    const newRow = {
+      id: Date.now(),
+      shortName: `${nextStartYear}-${String(nextEndYear).slice(-2)}`,
+      name: `Academic Year ${nextStartYear}-${nextEndYear}`,
+      startDate: `${nextStartYear}-04-01`,
+      endDate: `${nextEndYear}-03-31`,
+      status: getStatus(
+        `${nextStartYear}-04-01`,
+        `${nextEndYear}-03-31`
+      ),
+    };
+
+    setYears([...years, newRow]);
   };
 
   const removeRow = (id) => {

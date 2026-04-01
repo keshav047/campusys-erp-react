@@ -92,14 +92,7 @@ const ReligionsPage = () => {
 
                 <td className="p-3 flex justify-center gap-2">
                   {/* Print */}
-                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white transition">
-                    🖨️
-                  </button>
-
-                  {/* Download */}
-                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-600 hover:text-white transition">
-                    ⬇️
-                  </button>
+                 
 
                   {/* Delete */}
                   <button

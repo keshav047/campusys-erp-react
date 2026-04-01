@@ -35,7 +35,7 @@ export const sidebarData = {
           ]
         },
 
-        { name: "Student Certificates", path: "/student-certificates", icon: "📜" }
+        { name: "Student Certificates", path: "/Student-Certificates", icon: "📜" }
       ]
     },
 
@@ -55,7 +55,7 @@ export const sidebarData = {
             { name: "Classes and Sections", path: "/add-class" },
              { name: "Student Groups", path: "/student-groups" },
  
-  { name: "Group Participants", path: "/group-participants" },
+  
   { name: "Academic Years", path: "/academic-years" },
   { name: "Religions", path: "/religions" },
    { name: "Certificate Templates", path: "/Certificate-Templates" }

@@ -91,11 +91,11 @@ export default function UserDefinedFields() {
                 <td style={td}>{f.name}</td>
                 <td style={td}>{f.sequence}</td>
                 <td style={td}>{f.viewPage}</td>
-                <td style={td}>
-                  <button onClick={() => openModal(f)} style={btnEdit}>
-                    Edit
+                <td className="px-4 py-4 flex gap-2">
+                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white">
+                    ✎
                   </button>
-                </td>
+                                  </td>
               </tr>
             ))}
           </tbody>
