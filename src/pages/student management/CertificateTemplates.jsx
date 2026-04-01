@@ -26,12 +26,14 @@ export default function CertificateTemplates() {
 
             <div style={styles.actions}>
               <input
-                style={styles.input}
+                style={styles.searchInput}
                 placeholder="Search by template name..."
               />
-              <button style={styles.searchBtn}>Search</button>
+
+              
+
               <button
-                style={styles.primaryBtn}
+                style={styles.addBtn}
                 onClick={() => setShowAdd(true)}
               >
                 + Add Template
@@ -44,19 +46,19 @@ export default function CertificateTemplates() {
             <table style={styles.table}>
               <thead style={styles.thead}>
                 <tr>
-                  <th>Template Name</th>
-                  <th>Placeholders Used</th>
-                  <th>Last Modified</th>
-                  <th>Actions</th>
+                  <th style={styles.th}>Template Name</th>
+                  <th style={styles.th}>Placeholders Used</th>
+                  <th style={styles.th}>Last Modified</th>
+                  <th style={styles.th}>Actions</th>
                 </tr>
               </thead>
 
               <tbody>
                 {templates.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.name}</td>
+                  <tr key={index} style={styles.tr}>
+                    <td style={styles.td}>{item.name}</td>
 
-                    <td>
+                    <td style={styles.td}>
                       {item.placeholders.map((p, i) => (
                         <span key={i} style={styles.badge}>
                           {p}
@@ -64,16 +66,14 @@ export default function CertificateTemplates() {
                       ))}
                     </td>
 
-                    <td>{item.date}</td>
+                    <td style={styles.td}>{item.date}</td>
 
-                    <td className="px-4 py-4 flex gap-2">
-                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white">
-                    ✎
-                  </button>
-                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-600 hover:text-white">
-                    🗑
-                  </button>
-                </td>
+                    <td style={styles.td}>
+                      <div style={styles.actionBtns}>
+                        <button style={styles.editBtn}>✎</button>
+                        <button style={styles.deleteBtn}>🗑</button>
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -85,6 +85,7 @@ export default function CertificateTemplates() {
           {/* ADD PAGE */}
           <div style={styles.header}>
             <h2 style={styles.title}>Add New Template</h2>
+
             <button
               style={styles.backBtn}
               onClick={() => setShowAdd(false)}
@@ -175,53 +176,62 @@ export default function CertificateTemplates() {
 
 const styles = {
   container: {
-    padding: "20px",
-    background: "#f3f4f6",
+    padding: "20px 30px",
+    background: "#f5f7fb",
     minHeight: "100vh",
   },
 
   header: {
     display: "flex",
     justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: "20px",
   },
 
   title: {
+    fontSize: "20px",
+    fontWeight: "600",
     color: "#1e3a8a",
   },
 
   actions: {
     display: "flex",
-    gap: "10px",
+    alignItems: "center",
+    gap: "12px",
   },
 
-  input: {
-    padding: "8px",
-    borderRadius: "6px",
-    border: "1px solid #ccc",
+  searchInput: {
+    width: "280px",
+    padding: "12px 14px",
+    borderRadius: "8px",
+    border: "1px solid #d1d5db",
+    outline: "none",
   },
 
   searchBtn: {
     background: "#1e3a8a",
     color: "#fff",
-    padding: "8px 14px",
-    border: "none",
-    borderRadius: "6px",
-  },
-
-  primaryBtn: {
-    background: "#1e3a8a",
-    color: "#fff",
-    padding: "10px 18px",
+    padding: "12px 18px",
     border: "none",
     borderRadius: "8px",
     cursor: "pointer",
   },
 
+  addBtn: {
+    background: "#1e3a8a",
+    color: "#fff",
+    padding: "12px 20px",
+    border: "none",
+    borderRadius: "10px",
+    fontWeight: "500",
+    cursor: "pointer",
+  },
+
   card: {
     background: "#fff",
-    borderRadius: "10px",
+    borderRadius: "12px",
     padding: "15px",
+    boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
   },
 
   table: {
@@ -233,6 +243,20 @@ const styles = {
     background: "#e0edff",
   },
 
+  th: {
+    textAlign: "left",
+    padding: "12px",
+    fontWeight: "600",
+  },
+
+  tr: {
+    borderBottom: "1px solid #eee",
+  },
+
+  td: {
+    padding: "12px",
+  },
+
   badge: {
     background: "#e6f0ff",
     color: "#1e3a8a",
@@ -242,21 +266,29 @@ const styles = {
     fontSize: "12px",
   },
 
+  actionBtns: {
+    display: "flex",
+    gap: "8px",
+  },
+
   editBtn: {
-    background: "orange",
-    color: "#fff",
-    padding: "6px 10px",
+    width: "35px",
+    height: "35px",
+    borderRadius: "50%",
+    background: "#dbeafe",
+    color: "#1e40af",
     border: "none",
-    borderRadius: "5px",
-    marginRight: "5px",
+    cursor: "pointer",
   },
 
   deleteBtn: {
-    background: "red",
-    color: "#fff",
-    padding: "6px 10px",
+    width: "35px",
+    height: "35px",
+    borderRadius: "50%",
+    background: "#fee2e2",
+    color: "#dc2626",
     border: "none",
-    borderRadius: "5px",
+    cursor: "pointer",
   },
 
   formCard: {

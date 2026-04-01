@@ -42,7 +42,7 @@ export const sidebarData = {
     {
       section: "CONFIGURATION",
       items: [
-        { name: "Setup", path: "/setup", icon: "⚙️" },
+        
 
         {
           name: "Setup Options",

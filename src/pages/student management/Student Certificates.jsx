@@ -167,23 +167,7 @@ export default function StudentCertificates() {
           </div>
 
           {/* STUDENT LIST */}
-          <div style={styles.studentList}>
-            {filteredStudents.map((s) => (
-              <div
-                key={s.id}
-                style={{
-                  ...styles.studentItem,
-                  background:
-                    selectedStudent?.id === s.id
-                      ? "#d1fae5"
-                      : "#fff",
-                }}
-                onClick={() => setSelectedStudent(s)}
-              >
-                {s.name} ({s.admissionNo}) - {s.classSection}
-              </div>
-            ))}
-          </div>
+       
 
           {/* TEMPLATE */}
           <label style={styles.label}>
