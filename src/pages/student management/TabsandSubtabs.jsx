@@ -4,6 +4,9 @@ export default function TabsSubTabs() {
   const [showTabModal, setShowTabModal] = useState(false);
   const [showSubTabModal, setShowSubTabModal] = useState(false);
 
+  const [subTabName, setSubTabName] = useState("");
+  const [selectedTab, setSelectedTab] = useState("");
+
   const data = [
     {
       name: "Basic Information",
@@ -32,16 +35,17 @@ export default function TabsSubTabs() {
         <h1 style={title}>Tabs & Sub Tabs</h1>
 
         <div style={{ display: "flex", gap: "10px" }}>
+           <button style={btnPrimary} onClick={() => setShowTabModal(true)}>
+            + Tab
+          </button>
           <button style={btnSecondary} onClick={() => setShowSubTabModal(true)}>
             + Sub Tab
           </button>
-          <button style={btnPrimary} onClick={() => setShowTabModal(true)}>
-            + Tab
-          </button>
+          
         </div>
       </div>
 
-      {/* Card */}
+      {/* Table */}
       <div style={card}>
         <h2 style={{ marginBottom: "15px", color: "#1a4b8c" }}>
           Student Form Tabs
@@ -64,9 +68,8 @@ export default function TabsSubTabs() {
                 <td style={tdBold}>{item.name}</td>
                 <td style={td}>{item.subTabs}</td>
                 <td style={td}>{item.desc}</td>
-                
+
                 <td style={td}>
-                    
                   <span
                     style={{
                       ...badge,
@@ -79,26 +82,28 @@ export default function TabsSubTabs() {
                     {item.status}
                   </span>
                 </td>
+
                 <td className="px-4 py-4 flex gap-2">
-                    <button className="w-9 h-9 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white">
-                      ✎
-                    </button>
-                    <button className="w-9 h-9 flex items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-600 hover:text-white">
-                      🗑
-                    </button>
-                  </td>
+                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white">
+                    ✎
+                  </button>
+                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-600 hover:text-white">
+                    🗑
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
 
-      {/* Modal */}
+      {/* ADD TAB MODAL */}
       {showTabModal && (
         <div style={modal}>
           <div style={modalBox}>
             <h3>Add Tab</h3>
             <input placeholder="Tab Name" style={input} />
+
             <div style={modalActions}>
               <button onClick={() => setShowTabModal(false)}>Cancel</button>
               <button style={btnPrimary}>Save</button>
@@ -107,14 +112,59 @@ export default function TabsSubTabs() {
         </div>
       )}
 
+      {/* ✅ UPDATED SUB TAB MODAL */}
       {showSubTabModal && (
         <div style={modal}>
           <div style={modalBox}>
             <h3>Add Sub Tab</h3>
-            <input placeholder="Sub Tab Name" style={input} />
+
+            {/* DROPDOWN */}
+            <select
+              value={selectedTab}
+              onChange={(e) => setSelectedTab(e.target.value)}
+              style={input}
+            >
+              <option value="">-- Select Tab --</option>
+              {data.map((tab, i) => (
+                <option key={i} value={tab.name}>
+                  {tab.name}
+                </option>
+              ))}
+            </select>
+
+            {/* INPUT */}
+            <input
+              placeholder="Sub Tab Name"
+              value={subTabName}
+              onChange={(e) => setSubTabName(e.target.value)}
+              style={input}
+            />
+
+            {/* BUTTONS */}
             <div style={modalActions}>
-              <button onClick={() => setShowSubTabModal(false)}>Cancel</button>
-              <button style={btnPrimary}>Save</button>
+              <button onClick={() => setShowSubTabModal(false)}>
+                Cancel
+              </button>
+
+              <button
+                style={{
+                  ...btnPrimary,
+                  opacity: selectedTab && subTabName ? 1 : 0.5,
+                }}
+                disabled={!selectedTab || !subTabName}
+                onClick={() => {
+                  console.log("SubTab Added:", {
+                    parent: selectedTab,
+                    name: subTabName,
+                  });
+
+                  setShowSubTabModal(false);
+                  setSubTabName("");
+                  setSelectedTab("");
+                }}
+              >
+                Save
+              </button>
             </div>
           </div>
         </div>
@@ -123,7 +173,7 @@ export default function TabsSubTabs() {
   );
 }
 
-/* 🎨 Styles */
+/* 🎨 Styles (same as yours) */
 
 const container = {
   padding: "30px",

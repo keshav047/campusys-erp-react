@@ -82,7 +82,7 @@ addressProof: null,
 
   // Validation for Step 1
   const validateStep1 = () => {
-    if (!studentData.firstName || !studentData.lastName) {
+    if (!studentData.firstName ) {
       alert("Please enter First and Last Name");
       return false;
     }
@@ -104,7 +104,7 @@ addressProof: null,
 const steps = [
   "Basic Details",
   "Parent Info",
-  "Academic",
+  
   "Documents"
 ];
 
@@ -199,129 +199,67 @@ const handleFileChange = (e) => {
 
           {/* Personal Details */}
           <div className="grid md:grid-cols-3 gap-5">
-            <input id="firstName" placeholder="First Name *" value={studentData.firstName} onChange={handleChange} className="border p-2 rounded" />
-            <input id="middleName" placeholder="Middle Name" value={studentData.middleName} onChange={handleChange} className="border p-2 rounded" />
-            <input id="lastName" placeholder="Last Name *" value={studentData.lastName} onChange={handleChange} className="border p-2 rounded" />
+  <input id="firstName" placeholder="First Name *" value={studentData.firstName} onChange={handleChange} className="border p-2 rounded text-gray-700 placeholder-gray-900" />
+  
+  <input id="middleName" placeholder="Middle Name" value={studentData.middleName} onChange={handleChange} className="border p-2 rounded text-gray-700 placeholder-gray-900" />
+  
+  <input id="lastName" placeholder="Last Name " value={studentData.lastName} onChange={handleChange} className="border p-2 rounded text-gray-700 placeholder-gray-900" />
 
-            <input id="primaryMobile" placeholder="Mobile *" value={studentData.primaryMobile} onChange={handleChange} className="border p-2 rounded" />
+  <input id="primaryMobile" placeholder="Mobile *" value={studentData.primaryMobile} onChange={handleChange} className="border p-2 rounded text-gray-700 placeholder-gray-900" />
 
-            <select id="studentType" value={studentData.studentType} onChange={handleChange} className="border p-2 rounded">
-              <option value="">Student Type</option>
-              <option value="Regular">Regular</option>
-              <option value="Scholarship">Scholarship</option>
-              <option value="Hostel">Hostel</option>
-            </select>
+  <select id="studentType" value={studentData.studentType} onChange={handleChange} className="border p-2 rounded text-gray-900">
+    <option value="">Student Type</option>
+    <option value="Regular">Regular</option>
+    <option value="Scholarship">Scholarship</option>
+    <option value="Hostel">Hostel</option>
+  </select>
 
-            <input id="caste" placeholder="Caste" value={studentData.caste} onChange={handleChange} className="border p-2 rounded" />
+  <input id="caste" placeholder="Caste" value={studentData.caste} onChange={handleChange} className="border p-2 rounded text-gray-700 placeholder-gray-900" />
 
-            <select id="religion" value={studentData.religion} onChange={handleChange} className="border p-2 rounded">
-              <option value="">Religion</option>
-              <option>Hindu</option>
-              <option>Muslim</option>
-              <option>Christian</option>
-            </select>
+  <select id="religion" value={studentData.religion} onChange={handleChange} className="border p-2 rounded text-gray-900">
+    <option value="">Religion</option>
+    <option>Hindu</option>
+    <option>Muslim</option>
+    <option>Christian</option>
+  </select>
 
-            <input type="date" id="dateOfBirth" value={studentData.dateOfBirth} onChange={handleChange} className="border p-2 rounded" />
+  <input type="date" id="dateOfBirth" value={studentData.dateOfBirth} onChange={handleChange} className="border p-2 rounded text-gray-900" />
 
-            <select id="gender" value={studentData.gender} onChange={handleChange} className="border p-2 rounded">
-              <option value="">Gender</option>
-              <option>Male</option>
-              <option>Female</option>
-            </select>
+  <select id="gender" value={studentData.gender} onChange={handleChange} className="border p-2 rounded text-gray-900">
+    <option value="">Gender</option>
+    <option>Male</option>
+    <option>Female</option>
+  </select>
 
-            <input id="nationality" value={studentData.nationality} onChange={handleChange} className="border p-2 rounded" />
+  <input id="nationality" placeholder="Nationality" value={studentData.nationality} onChange={handleChange} className="border p-2 rounded text-gray-700 placeholder-gray-900" />
 
-            <select id="bloodGroup" value={studentData.bloodGroup} onChange={handleChange} className="border p-2 rounded">
-              <option value="">Blood Group</option>
-              <option>A+</option>
-              <option>B+</option>
-              <option>O+</option>
-            </select>
+  <select id="bloodGroup" value={studentData.bloodGroup} onChange={handleChange} className="border p-2 rounded text-gray-900">
+    <option value="">Blood Group</option>
+    <option>A+</option>
+    <option>B+</option>
+    <option>O+</option>
+  </select>
 
-            <input id="aadharNumber" placeholder="Aadhar" value={studentData.aadharNumber} onChange={handleChange} className="border p-2 rounded" />
-          </div>
+  <input id="aadharNumber" placeholder="Aadhar" value={studentData.aadharNumber} onChange={handleChange} className="border p-2 rounded text-gray-700 placeholder-gray-900" />
+</div>
 
           {/* Address */}
           <h3 className="mt-8 font-semibold text-gray-700">Address</h3>
           <div className="grid md:grid-cols-3 gap-5 mt-3">
-            <input id="addressLine1" placeholder="Address Line 1" value={studentData.addressLine1} onChange={handleChange} className="border p-2 rounded" />
-            <input id="addressLine2" placeholder="Address Line 2" value={studentData.addressLine2} onChange={handleChange} className="border p-2 rounded" />
-            <input id="city" placeholder="City" value={studentData.city} onChange={handleChange} className="border p-2 rounded" />
-            <input id="state" placeholder="State" value={studentData.state} onChange={handleChange} className="border p-2 rounded" />
-            <input id="pincode" placeholder="Pincode" value={studentData.pincode} onChange={handleChange} className="border p-2 rounded" />
-            <input id="country" placeholder="Country" value={studentData.country} onChange={handleChange} className="border p-2 rounded" />
+            <input id="addressLine1" placeholder="Address Line 1" value={studentData.addressLine1} onChange={handleChange} className="border p-2 rounded placeholder-gray-900" />
+            <input id="addressLine2" placeholder="Address Line 2" value={studentData.addressLine2} onChange={handleChange} className="border p-2 rounded placeholder-gray-900" />
+            <input id="city" placeholder="City" value={studentData.city} onChange={handleChange} className="border p-2 rounded placeholder-gray-900" />
+            <input id="state" placeholder="State" value={studentData.state} onChange={handleChange} className="border p-2 rounded placeholder-gray-900" />
+            <input id="pincode" placeholder="Pincode" value={studentData.pincode} onChange={handleChange} className="border p-2 rounded placeholder-gray-900" />
+            <input id="country" placeholder="Country" value={studentData.country} onChange={handleChange} className="border p-2 rounded placeholder-gray-900" />
           </div>
 
-          {/* Next Button */}
-          <div className="flex justify-end mt-8">
-            <button onClick={handleNext} className="bg-blue-700 text-white px-6 py-2 rounded">
-              Next →
-            </button>
-          </div>
-        </div>
-      )}
 
-      {/* STEP 2: Parent Information */}
-      {step === 2 && (
-        <div className="bg-white p-8 rounded-xl shadow-md max-w-5xl mx-auto">
-          <div div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Father Section */}
-            <div className="col-span-2">
-              <h3 className="font-bold text-blue-800 border-b pb-2 mb-4">Father's Details</h3>
-              <div className="grid md:grid-cols-3 gap-4">
-                <input id="fatherFirstName" placeholder="First Name *" value={studentData.fatherFirstName} onChange={handleChange} className="border p-2.5 rounded-lg" />
-                <input id="fatherMiddleName" placeholder="Middle Name" value={studentData.fatherMiddleName} onChange={handleChange} className="border p-2.5 rounded-lg" />
-                <input id="fatherLastName" placeholder="Last Name *" value={studentData.fatherLastName} onChange={handleChange} className="border p-2.5 rounded-lg" />
-                <input id="fatherMobile" placeholder="Mobile Number *" value={studentData.fatherMobile} onChange={handleChange} className="border p-2.5 rounded-lg" />
-                <input id="fatherEmail" placeholder="Email Address" value={studentData.fatherEmail} onChange={handleChange} className="border p-2.5 rounded-lg" />
-                <input id="fatherOccupation" placeholder="Occupation" value={studentData.fatherOccupation} onChange={handleChange} className="border p-2.5 rounded-lg" />
-                <input id="fatherEducation" placeholder="Education" value={studentData.fatherEducation} onChange={handleChange} className="border p-2.5 rounded-lg" />
-                <input id="fatherAnnualIncome" placeholder="Annual Income" value={studentData.fatherAnnualIncome} onChange={handleChange} className="border p-2.5 rounded-lg" />
-                <input id="fatherAadhar" placeholder="Aadhar Number" value={studentData.fatherAadhar} onChange={handleChange} className="border p-2.5 rounded-lg" />
-              </div>
-            </div>
+    <h3  className="mt-8 font-semibold text-gray-700">Academic Information</h3>
 
-            {/* Mother Section */}
-            <div className="col-span-2 mt-8">
-              <h3 className="font-bold text-pink-700 border-b pb-2 mb-4">Mother's Details</h3>
-              <div className="grid md:grid-cols-3 gap-4">
-                <input id="motherFirstName" placeholder="First Name *" value={studentData.motherFirstName} onChange={handleChange} className="border p-2.5 rounded-lg" />
-                <input id="motherMiddleName" placeholder="Middle Name" value={studentData.motherMiddleName} onChange={handleChange} className="border p-2.5 rounded-lg" />
-                <input id="motherLastName" placeholder="Last Name *" value={studentData.motherLastName} onChange={handleChange} className="border p-2.5 rounded-lg" />
-                <input id="motherMobile" placeholder="Mobile Number" value={studentData.motherMobile} onChange={handleChange} className="border p-2.5 rounded-lg" />
-                <input id="motherEmail" placeholder="Email Address" value={studentData.motherEmail} onChange={handleChange} className="border p-2.5 rounded-lg" />
-                <input id="motherOccupation" placeholder="Occupation" value={studentData.motherOccupation} onChange={handleChange} className="border p-2.5 rounded-lg" />
-                <input id="motherEducation" placeholder="Education" value={studentData.motherEducation} onChange={handleChange} className="border p-2.5 rounded-lg" />
-                <input id="motherAnnualIncome" placeholder="Annual Income" value={studentData.motherAnnualIncome} onChange={handleChange} className="border p-2.5 rounded-lg" />
-                <input id="motherAadhar" placeholder="Aadhar Number" value={studentData.motherAadhar} onChange={handleChange} className="border p-2.5 rounded-lg" />
-              </div>
-            </div>
+    <div className="grid md:grid-cols-3 gap-5 mt-3">
 
-            {/* Save Button */}
-          <div className="flex justify-between mt-8">
-  <button onClick={handlePrevStep} className="border px-6 py-2 rounded">
-    ← Back
-  </button>
-
-  <button
-    onClick={handleNextStep}
-    className="bg-blue-700 text-white px-6 py-2 rounded"
-  >
-    Next →
-  </button>
-</div>
-        
-         </div>
-        </div>
-      )}
-      {step === 3 && (
-  <div className="bg-white p-8 rounded-xl shadow-md max-w-5xl mx-auto">
-
-    <h3 className="font-bold text-blue-800 mb-4">Academic Information</h3>
-
-    <div className="grid md:grid-cols-3 gap-4">
-
-      <input id="admissionNumber" placeholder="Admission Number *" className="border p-2 rounded" onChange={handleChange} />
+      <input id="admissionNumber" placeholder="Admission Number *" className="border p-2 rounded placeholder-gray-900" onChange={handleChange} />
 
       <input type="date" id="admissionDate" className="border p-2 rounded" onChange={handleChange} />
 
@@ -344,30 +282,85 @@ const handleFileChange = (e) => {
         {["A","B","C","D"].map(sec => <option key={sec}>{sec}</option>)}
       </select>
 
-      <input id="rollNumber" placeholder="Roll Number" className="border p-2 rounded" onChange={handleChange} />
+      <input id="rollNumber" placeholder="Roll Number" className="border p-2 rounded placeholder-gray-900" onChange={handleChange} />
     </div>
 
     {/* Previous School */}
-    <h3 className="font-bold text-blue-800 mt-8 mb-4">Previous School</h3>
+    <h3 className="grid md:grid-cols-3 gap-5 mt-3">Previous School</h3>
 
-    <div className="grid md:grid-cols-3 gap-4">
-      <input id="previousSchool" placeholder="Previous School" className="border p-2 rounded" onChange={handleChange} />
-      <input id="previousClass" placeholder="Previous Class" className="border p-2 rounded" onChange={handleChange} />
-      <input id="transferCertificate" placeholder="TC Number" className="border p-2 rounded" onChange={handleChange} />
+    <div className="grid md:grid-cols-3 gap-5 mt-3">
+      <input id="previousSchool" placeholder="Previous School" className="border p-2 rounded placeholder-gray-900" onChange={handleChange} />
+      <input id="previousClass" placeholder="Previous Class" className="border p-2 rounded placeholder-gray-900" onChange={handleChange} />
+      <input id="transferCertificate" placeholder="TC Number" className="border p-2 rounded placeholder-gray-900" onChange={handleChange} />
     </div>
 
+   
+
+
+          {/* Next Button */}
+          <div className="flex justify-end mt-8">
+            <button onClick={handleNext} className="bg-blue-700 text-white px-6 py-2 rounded">
+              Next →
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* STEP 2: Parent Information */}
+      {step === 2 && (
+        <div className="bg-white p-8 rounded-xl shadow-md max-w-5xl mx-auto">
+          <div div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Father Section */}
+            <div className="col-span-2">
+              <h3 className="grid md:grid-cols-3 gap-5 mt-3">Father's Details</h3>
+              <div className="grid md:grid-cols-3 gap-4">
+                <input id="fatherFirstName" placeholder="First Name *" value={studentData.fatherFirstName} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+                <input id="fatherMiddleName" placeholder="Middle Name" value={studentData.fatherMiddleName} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+                <input id="fatherLastName" placeholder="Last Name *" value={studentData.fatherLastName} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+                <input id="fatherMobile" placeholder="Mobile Number *" value={studentData.fatherMobile} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+                <input id="fatherEmail" placeholder="Email Address" value={studentData.fatherEmail} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+                <input id="fatherOccupation" placeholder="Occupation" value={studentData.fatherOccupation} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+                <input id="fatherEducation" placeholder="Education" value={studentData.fatherEducation} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+                <input id="fatherAnnualIncome" placeholder="Annual Income" value={studentData.fatherAnnualIncome} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+                <input id="fatherAadhar" placeholder="Aadhar Number" value={studentData.fatherAadhar} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+              </div>
+            </div>
+
+            {/* Mother Section */}
+            <div className="col-span-2 mt-8">
+              <h3 className="grid md:grid-cols-3 gap-5 mt-3">Mother's Details</h3>
+              <div className="grid md:grid-cols-3 gap-4">
+                <input id="motherFirstName" placeholder="First Name *" value={studentData.motherFirstName} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+                <input id="motherMiddleName" placeholder="Middle Name" value={studentData.motherMiddleName} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+                <input id="motherLastName" placeholder="Last Name *" value={studentData.motherLastName} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+                <input id="motherMobile" placeholder="Mobile Number" value={studentData.motherMobile} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+                <input id="motherEmail" placeholder="Email Address" value={studentData.motherEmail} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+                <input id="motherOccupation" placeholder="Occupation" value={studentData.motherOccupation} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+                <input id="motherEducation" placeholder="Education" value={studentData.motherEducation} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+                <input id="motherAnnualIncome" placeholder="Annual Income" value={studentData.motherAnnualIncome} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+                <input id="motherAadhar" placeholder="Aadhar Number" value={studentData.motherAadhar} onChange={handleChange} className="border p-2.5 rounded-lg placeholder-gray-900" />
+              </div>
+            </div>
+
+            {/* Save Button */}
     <div className="flex justify-between mt-8">
       <button onClick={handlePrevStep} className="border px-6 py-2 rounded">
         ← Back
       </button>
-      <button onClick={handleNextStep} className="bg-blue-700 text-white px-6 py-2 rounded">
+      
+    </div>
+<div className="flex justify-end mt-8">
+            <button onClick={handleNextStep} className="bg-blue-700 text-white px-6 py-2 rounded">
         Next →
       </button>
-    </div>
-
+          </div>
   </div>
-)}
-{step === 4 && (
+        
+         
+        </div>
+      )}
+
+{step === 3 && (
   <div className="bg-white p-8 rounded-xl shadow-md max-w-5xl mx-auto">
 
     <h3 className="font-bold text-green-700 mb-4">Documents Upload</h3>

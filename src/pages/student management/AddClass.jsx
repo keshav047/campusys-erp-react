@@ -157,7 +157,7 @@ export default function AddClass() {
                 <tr className="bg-blue-50">
                   <th className="p-3 text-left">Section</th>
                   <th className="p-3 text-left">Capacity</th>
-                  <th className="p-3 text-left">Action</th>
+                  
                 </tr>
               </thead>
 
@@ -185,14 +185,7 @@ export default function AddClass() {
                       />
                     </td>
 
-                    <td className="p-2">
-                      <button
-                        onClick={() => removeSection(s.id)}
-                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
-                      >
-                        Remove
-                      </button>
-                    </td>
+                   
                   </tr>
                 ))}
               </tbody>

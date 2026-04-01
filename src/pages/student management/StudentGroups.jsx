@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaSearch, FaEdit, FaUserPlus, FaPlus } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function StudentGroups() {
   const [search, setSearch] = useState("");
@@ -35,84 +36,72 @@ export default function StudentGroups() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-
+    <div style={container}>
+      
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-blue-900">
-          Student Groups
-        </h1>
+      <div style={header}>
+        <h2 style={title}>Student Groups</h2>
 
-        <button className="flex items-center gap-2 bg-blue-900 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-800 transition">
-          <FaPlus /> Add Group
-        </button>
-      </div>
+        <div style={searchContainer}>
+          
+          {/* Search */}
+          <div style={searchBox}>
+            <span style={searchIcon}>🔍</span>
+            <input
+              type="text"
+              placeholder="Search groups..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              style={searchInput}
+            />
+          </div>
 
-      {/* Search */}
-      <div className="relative mb-6">
-        <FaSearch className="absolute top-3 left-3 text-gray-400" />
-        <input
-          type="text"
-          placeholder="Search groups..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
-        />
+          {/* Add Button */}
+          <Link to="/add-student-group" style={{ textDecoration: "none" }}>
+  <button style={btnPrimary}>
+    <FaPlus /> Add Group
+  </button>
+</Link>
+        </div>
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl shadow overflow-hidden">
-        <table className="w-full">
-          <thead className="bg-blue-50 text-blue-900">
-            <tr>
-              <th className="text-left p-4">Group Name</th>
-              <th className="text-left p-4">Description</th>
-              <th className="text-center p-4">Members</th>
-              <th className="text-center p-4">Created Date</th>
-              <th className="text-center p-4">Actions</th>
+      <div style={card}>
+        <table width="100%">
+          <thead>
+            <tr style={{ background: "#e8f2fc" }}>
+              <th style={th}>Group Name</th>
+              <th style={th}>Description</th>
+              <th style={th}>Members</th>
+              <th style={th}>Created Date</th>
+              <th style={th}>Action</th>
             </tr>
           </thead>
 
           <tbody>
             {filteredGroups.length === 0 ? (
               <tr>
-                <td colSpan="5" className="text-center py-10 text-gray-500">
+                <td colSpan="5" style={{ textAlign: "center", padding: 20 }}>
                   No Groups Found
                 </td>
               </tr>
             ) : (
               filteredGroups.map((group) => (
-                <tr
-                  key={group.id}
-                  className="border-t hover:bg-gray-50 transition"
-                >
-                  <td className="p-4 font-semibold text-blue-900">
-                    {group.name}
-                  </td>
-
-                  <td className="p-4 text-gray-600">
-                    {group.description}
-                  </td>
-
-                  <td className="p-4 text-center font-medium">
-                    {group.memberCount}
-                  </td>
-
-                  <td className="p-4 text-center text-gray-500">
+                <tr key={group.id}>
+                  <td style={td}>{group.name}</td>
+                  <td style={td}>{group.description}</td>
+                  <td style={td}>{group.memberCount}</td>
+                  <td style={td}>
                     {new Date(group.createdDate).toLocaleDateString()}
                   </td>
-
-                  <td className="p-4">
-                    <div className="flex justify-center gap-2">
-                      <button className="bg-yellow-500 text-white px-3 py-1 rounded-md flex items-center gap-1 hover:bg-yellow-600">
-                        <FaEdit /> Edit
-                      </button>
-
-                      <button className="bg-green-500 text-white px-3 py-1 rounded-md flex items-center gap-1 hover:bg-green-600">
-                        <FaUserPlus /> Add
-                      </button>
-                    </div>
-                  </td>
+                   <td className="px-4 py-4 flex gap-2">
+                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white">
+                    ✎
+                  </button>
+                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-600 hover:text-white">
+                    🗑
+                  </button>
+                </td>
                 </tr>
               ))
             )}
@@ -122,3 +111,97 @@ export default function StudentGroups() {
     </div>
   );
 }
+
+/* ===== SAME STYLES ===== */
+
+const container = {
+  padding: "30px",
+  background: "#f8fafc",
+  minHeight: "100vh",
+};
+
+const header = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+};
+
+const title = {
+  fontSize: "28px",
+  fontWeight: "800",
+  color: "#1a4b8c",
+};
+
+const searchContainer = {
+  display: "flex",
+  gap: "10px",
+  alignItems: "center",
+};
+
+const searchBox = {
+  display: "flex",
+  alignItems: "center",
+  border: "1px solid #ccc",
+  borderRadius: "6px",
+  padding: "0 8px",
+  background: "#fff",
+};
+
+const searchIcon = {
+  marginRight: "5px",
+  color: "#888",
+};
+
+const searchInput = {
+  border: "none",
+  outline: "none",
+  padding: "8px",
+};
+
+const card = {
+  background: "#fff",
+  padding: 20,
+  borderRadius: 10,
+  marginTop: 20,
+};
+
+const th = {
+  padding: 10,
+  textAlign: "left",
+};
+
+const td = {
+  padding: 10,
+  borderBottom: "1px solid #eee",
+};
+
+const btnPrimary = {
+  display: "flex",
+  alignItems: "center",
+  gap: "5px",
+  background: "#1a4b8c",
+  color: "#fff",
+  padding: "8px 15px",
+  border: "none",
+  borderRadius: 6,
+  cursor: "pointer",
+};
+
+const btnEdit = {
+  background: "#f59e0b",
+  color: "#fff",
+  padding: "6px 10px",
+  border: "none",
+  borderRadius: 5,
+  cursor: "pointer",
+  marginRight: "5px",
+};
+
+const btnAdd = {
+  background: "#22c55e",
+  color: "#fff",
+  padding: "6px 10px",
+  border: "none",
+  borderRadius: 5,
+  cursor: "pointer",
+};

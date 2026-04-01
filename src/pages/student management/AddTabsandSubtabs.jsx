@@ -3,8 +3,6 @@ import { useState } from "react";
 export default function AddTab() {
   const [step, setStep] = useState(1);
   const [tabName, setTabName] = useState("");
-  const [tabIcon, setTabIcon] = useState("fas fa-user");
-  const [description, setDescription] = useState("");
   const [showOn, setShowOn] = useState([]);
   const [subTabs, setSubTabs] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -29,96 +27,67 @@ export default function AddTab() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 md:p-6">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-4xl mx-auto">
 
-        {/* Header */}
-        <h1 className="text-2xl md:text-3xl font-bold text-blue-800 mb-4">
-          Add New Tab
-        </h1>
+        <h1 className="text-2xl font-bold mb-4">Add New Tab</h1>
 
-        {/* Step Indicator */}
-        <div className="flex items-center gap-4 mb-6 flex-wrap">
-          <div className={`flex items-center gap-2 ${step === 1 ? "text-blue-600" : "text-gray-500"}`}>
-            <div className={`w-8 h-8 flex items-center justify-center rounded-full ${step === 1 ? "bg-blue-600 text-white" : "bg-gray-300"}`}>1</div>
-            Tab Details
-          </div>
-          <div className="w-10 h-[2px] bg-gray-300 hidden sm:block" />
-          <div className={`flex items-center gap-2 ${step === 2 ? "text-blue-600" : "text-gray-500"}`}>
-            <div className={`w-8 h-8 flex items-center justify-center rounded-full ${step === 2 ? "bg-blue-600 text-white" : "bg-gray-300"}`}>2</div>
-            Sub Tabs
-          </div>
-        </div>
-
-        {/* Step 1 */}
+        {/* STEP 1 */}
         {step === 1 && (
-          <div className="bg-white p-4 md:p-6 rounded-xl shadow">
+          <div className="bg-white p-6 rounded shadow">
 
             <div className="mb-4">
-              <label className="block font-semibold mb-1">Tab Name *</label>
+              <label className="font-semibold">Tab Name *</label>
               <input
                 value={tabName}
                 onChange={(e) => setTabName(e.target.value)}
-                className="w-full border p-2 rounded"
+                className="w-full border p-2 rounded mt-1"
               />
             </div>
 
             <div className="mb-4">
-              <label className="block font-semibold mb-1">Tab Icon</label>
-              <select
-                value={tabIcon}
-                onChange={(e) => setTabIcon(e.target.value)}
-                className="w-full border p-2 rounded"
-              >
-                <option value="fas fa-user">User</option>
-                <option value="fas fa-info-circle">Info</option>
-                <option value="fas fa-graduation-cap">Academic</option>
-              </select>
-            </div>
-
-            <div className="mb-4">
-              <label className="block font-semibold mb-2">Show On *</label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                {["student-profiles","transfer-certificate","admission-form","student-report","parent-portal","teacher-portal"].map((item) => (
-                  <div
-                    key={item}
-                    onClick={() => toggleShowOn(item)}
-                    className={`p-3 border rounded cursor-pointer ${showOn.includes(item) ? "bg-blue-100 border-blue-500" : "bg-gray-50"}`}
-                  >
-                    {item}
-                  </div>
-                ))}
+              <label className="font-semibold">Show On *</label>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {["student-profile", "admission", "report", "teacher"].map(
+                  (item) => (
+                    <button
+                      key={item}
+                      onClick={() => toggleShowOn(item)}
+                      className={`px-3 py-1 rounded border ${
+                        showOn.includes(item)
+                          ? "bg-blue-600 text-white"
+                          : "bg-gray-100"
+                      }`}
+                    >
+                      {item}
+                    </button>
+                  )
+                )}
               </div>
             </div>
 
-            <div className="mb-4">
-              <label className="block font-semibold mb-1">Description</label>
-              <input
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                className="w-full border p-2 rounded"
-              />
-            </div>
-
-            <div className="flex justify-end gap-3">
-              <button className="border px-4 py-2 rounded">Cancel</button>
-              <button onClick={handleNext} className="bg-blue-600 text-white px-4 py-2 rounded">
-                Save & Next
+            <div className="flex justify-end">
+              <button
+                onClick={handleNext}
+                className="bg-blue-600 text-white px-4 py-2 rounded"
+              >
+                Next
               </button>
             </div>
           </div>
         )}
 
-        {/* Step 2 */}
+        {/* STEP 2 */}
         {step === 2 && (
-          <div className="bg-white p-4 md:p-6 rounded-xl shadow">
+          <div className="bg-white p-6 rounded shadow">
 
             <div className="flex justify-between mb-4">
               <h2 className="font-semibold">Sub Tabs</h2>
+
               <button
                 onClick={() => setShowModal(true)}
                 className="bg-blue-600 text-white px-3 py-1 rounded"
               >
-                + Add
+                + Add Sub Tab
               </button>
             </div>
 
@@ -127,16 +96,21 @@ export default function AddTab() {
             ) : (
               subTabs.map((tab, i) => (
                 <div key={i} className="border p-3 rounded mb-2">
-                  <div className="font-semibold">{tab.name}</div>
-                  <div className="text-sm text-gray-500">{tab.desc}</div>
+                  <div className="font-semibold">
+                    {tab.name} ({tab.parent})
+                  </div>
                 </div>
               ))
             )}
 
             <div className="flex justify-between mt-4">
-              <button onClick={() => setStep(1)} className="border px-4 py-2 rounded">
+              <button
+                onClick={() => setStep(1)}
+                className="border px-4 py-2 rounded"
+              >
                 Back
               </button>
+
               <button className="bg-green-600 text-white px-4 py-2 rounded">
                 Save & Close
               </button>
@@ -144,51 +118,88 @@ export default function AddTab() {
           </div>
         )}
 
-        {/* Modal */}
+        {/* MODAL */}
         {showModal && (
-          <Modal addSubTab={addSubTab} close={() => setShowModal(false)} />
+          <Modal
+            close={() => setShowModal(false)}
+            tabs={showOn}
+            addSubTab={addSubTab}
+          />
         )}
       </div>
     </div>
   );
 }
 
-function Modal({ addSubTab, close }) {
+/* ---------------- MODAL ---------------- */
+
+function Modal({ close, tabs, addSubTab }) {
+  const [selectedTab, setSelectedTab] = useState("");
   const [name, setName] = useState("");
-  const [desc, setDesc] = useState("");
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
-      <div className="bg-white p-6 rounded w-full max-w-md">
-        <h2 className="font-bold mb-3">Add Sub Tab</h2>
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4">
+      <div className="bg-white p-6 rounded-xl w-full max-w-md">
 
-        <input
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full border p-2 mb-3"
-        />
+        <h2 className="font-bold text-lg mb-4">Add Sub Tab</h2>
 
-        <input
-          placeholder="Description"
-          value={desc}
-          onChange={(e) => setDesc(e.target.value)}
-          className="w-full border p-2 mb-3"
-        />
+        {/* DROPDOWN */}
+        <div className="mb-4">
+          <label className="font-semibold">Select Tab *</label>
+          <select
+            value={selectedTab}
+            onChange={(e) => setSelectedTab(e.target.value)}
+            className="w-full border p-2 rounded mt-1"
+          >
+            <option value="">-- Select Tab --</option>
+            {tabs.map((tab, i) => (
+              <option key={i} value={tab}>
+                {tab}
+              </option>
+            ))}
+          </select>
+        </div>
 
-        <div className="flex justify-end gap-3">
-          <button onClick={close}>Cancel</button>
+        {/* INPUT */}
+        <div className="mb-4">
+          <label className="font-semibold">Sub Tab Name *</label>
+          <input
+            type="text"
+            placeholder="Enter sub tab name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full border p-2 rounded mt-1"
+          />
+        </div>
+
+        {/* BUTTONS */}
+        <div className="flex justify-end gap-2">
           <button
+            onClick={close}
+            className="px-4 py-2 border rounded"
+          >
+            Cancel
+          </button>
+
+          <button
+            disabled={!selectedTab || !name}
             onClick={() => {
-              if (!name) return;
-              addSubTab({ name, desc });
+              addSubTab({
+                name,
+                parent: selectedTab,
+              });
               close();
             }}
-            className="bg-green-600 text-white px-3 py-1 rounded"
+            className={`px-4 py-2 rounded ${
+              selectedTab && name
+                ? "bg-green-600 text-white"
+                : "bg-gray-300"
+            }`}
           >
             Save
           </button>
         </div>
+
       </div>
     </div>
   );

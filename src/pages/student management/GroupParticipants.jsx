@@ -28,16 +28,15 @@ export default function GroupParticipants() {
     },
   ]);
 
-  const filtered = participants.filter(
-    (p) =>
-      p.name.toLowerCase().includes(search.toLowerCase()) ||
-      p.admissionNo.toLowerCase().includes(search.toLowerCase()) ||
-      p.classSection.toLowerCase().includes(search.toLowerCase())
+  const filtered = participants.filter((p) =>
+    `${p.name} ${p.admissionNo} ${p.classSection}`
+      .toLowerCase()
+      .includes(search.toLowerCase())
   );
 
   const removeParticipant = (id) => {
     if (window.confirm("Remove this participant?")) {
-      setParticipants(participants.filter((p) => p.id !== id));
+      setParticipants((prev) => prev.filter((p) => p.id !== id));
     }
   };
 
@@ -46,15 +45,24 @@ export default function GroupParticipants() {
 
       {/* HEADER */}
       <div className="top-bar">
-        <div>
+        <div className="header-left">
           <h1>Group Participants</h1>
           <p className="subtitle">Manage students inside this group</p>
         </div>
 
-        <button className="btn-primary">+ Add Participant</button>
+       <div className="header-right">
+  <input
+    className="search-input"
+    placeholder="Search by name, admission no, class..."
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+  />
+
+  <button className="btn-primary">+ Add Participant</button>
+</div>
       </div>
 
-      {/* GROUP CARD */}
+      {/* GROUP INFO */}
       <div className="group-card">
         <div>
           <h2>Science Club</h2>
@@ -74,16 +82,7 @@ export default function GroupParticipants() {
         </div>
       </div>
 
-      {/* SEARCH */}
-      <div className="search-container">
-        <input
-          placeholder="Search by name, admission no, class..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
-
-      {/* TABLE CARD */}
+      {/* TABLE */}
       <div className="table-card">
         {filtered.length > 0 ? (
           <table>

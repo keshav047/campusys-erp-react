@@ -17,12 +17,10 @@ export default function UserDefinedFields() {
     viewPage: "",
   });
 
-  // Filter
   const filteredFields = fields.filter((f) =>
     f.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  // Open modal
   const openModal = (field = null) => {
     if (field) {
       setForm(field);
@@ -34,7 +32,6 @@ export default function UserDefinedFields() {
     setShowModal(true);
   };
 
-  // Save
   const handleSave = () => {
     if (!form.name || !form.sequence || !form.viewPage) {
       alert("All fields required");
@@ -44,34 +41,38 @@ export default function UserDefinedFields() {
     if (editId) {
       setFields(fields.map((f) => (f.id === editId ? { ...form, id: editId } : f)));
     } else {
-      setFields([
-        ...fields,
-        { ...form, id: Date.now() }
-      ]);
+      setFields([...fields, { ...form, id: Date.now() }]);
     }
 
     setShowModal(false);
   };
 
   return (
-    <div style={{ padding: "30px", background: "#f8fafc", minHeight: "100vh" }}>
+    <div style={container}>
       
       {/* Header */}
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 20 }}>
-        <h2 style={{ color: "#1a4b8c" }}>User Defined Fields</h2>
-        <button onClick={() => openModal()} style={btnPrimary}>
-          + Add Field
-        </button>
-      </div>
+      <div style={header}>
+        <h2 style={title}>User Defined Fields</h2>
 
-      {/* Search */}
-      <input
-        type="text"
-        placeholder="Search..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        style={inputStyle}
-      />
+        <div style={searchContainer}>
+          
+          {/* 🔍 Search with icon */}
+          <div style={searchBox}>
+            <span style={searchIcon}>🔍</span>
+            <input
+              type="text"
+              placeholder="Search..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              style={searchInput}
+            />
+          </div>
+
+          <button onClick={() => openModal()} style={btnPrimary}>
+            + Add Field
+          </button>
+        </div>
+      </div>
 
       {/* Table */}
       <div style={card}>
@@ -149,6 +150,51 @@ export default function UserDefinedFields() {
 }
 
 /* ================== STYLES ================== */
+
+const container = {
+  padding: "30px",
+  background: "#f8fafc",
+  minHeight: "100vh",
+};
+
+const header = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginBottom: "20px",
+};
+
+const title = {
+  fontSize: "28px",   // 🔥 bigger heading
+  fontWeight: "800",
+  color: "#1a4b8c",
+};
+
+const searchContainer = {
+  display: "flex",
+  gap: "10px",
+  alignItems: "center",
+};
+
+const searchBox = {
+  display: "flex",
+  alignItems: "center",
+  border: "1px solid #ccc",
+  borderRadius: "6px",
+  padding: "0 8px",
+  background: "#fff",
+};
+
+const searchIcon = {
+  marginRight: "5px",
+  color: "#888",
+};
+
+const searchInput = {
+  border: "none",
+  outline: "none",
+  padding: "8px",
+};
 
 const card = {
   background: "#fff",

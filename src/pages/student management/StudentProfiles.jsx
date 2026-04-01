@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   FaSearch,
   FaPlus,
@@ -55,79 +56,93 @@ export default function StudentProfiles() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      {/* Top Actions */}
-      <div className="flex justify-between mb-6">
-        <h1 className="text-2xl font-bold text-blue-900">
+    <div className="min-h-screen bg-gray-100 p-4 md:p-6">
+
+      {/* Top Bar */}
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6">
+
+        <h1 className="text-xl md:text-2xl font-bold text-blue-900">
           Student Profiles
         </h1>
 
-        <div className="flex gap-2">
+        {/* Controls */}
+        <div className="flex flex-col sm:flex-row flex-wrap gap-2 w-full md:w-auto">
+
+          {/* Search */}
+          <div className="relative w-full sm:w-64">
+            <FaSearch className="absolute top-3 left-3 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search student..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full pl-10 pr-3 py-2 border rounded"
+            />
+          </div>
+
+          {/* Filters */}
+          <div className="relative w-full sm:w-auto">
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className="w-full sm:w-auto flex justify-center items-center gap-2 border px-4 py-2 rounded"
+            >
+              Filters {showFilters ? <FaChevronUp /> : <FaChevronDown />}
+            </button>
+
+            {showFilters && (
+              <div className="absolute z-10 bg-white shadow rounded p-4 mt-2 w-full sm:w-56">
+                <select className="border p-2 rounded w-full mb-2">
+                  <option>All Classes</option>
+                  <option>Class 1</option>
+                  <option>Class 2</option>
+                </select>
+                <select className="border p-2 rounded w-full">
+                  <option>All Status</option>
+                  <option>active</option>
+                  <option>inactive</option>
+                </select>
+              </div>
+            )}
+          </div>
+
+          {/* Columns */}
           <button
             onClick={() => setShowColumnsModal(true)}
-            className="flex items-center gap-2 border px-4 py-2 rounded"
+            className="w-full sm:w-auto flex justify-center items-center gap-2 border px-4 py-2 rounded"
           >
             <FaColumns /> Columns
           </button>
 
-          <button className="flex items-center gap-2 bg-blue-900 text-white px-4 py-2 rounded">
-            <FaPlus /> Add Student
-          </button>
+          {/* Add */}
+        <Link to="/add-student">
+  <button className="w-full sm:w-auto flex justify-center items-center gap-2 bg-blue-900 text-white px-4 py-2 rounded">
+    <FaPlus /> Add Students
+  </button>
+</Link>
+
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="bg-white p-4 rounded mb-4 shadow">
-        <button
-          onClick={() => setShowFilters(!showFilters)}
-          className="flex items-center gap-2 text-blue-900"
-        >
-          Filters {showFilters ? <FaChevronUp /> : <FaChevronDown />}
-        </button>
-
-        {showFilters && (
-          <div className="grid grid-cols-2 gap-4 mt-4">
-            <select className="border p-2 rounded">
-              <option>All Classes</option>
-            </select>
-            <select className="border p-2 rounded">
-              <option>All Status</option>
-            </select>
-          </div>
-        )}
-      </div>
-
-      {/* Search */}
-      <div className="relative mb-4">
-        <FaSearch className="absolute top-3 left-3 text-gray-400" />
-        <input
-          type="text"
-          placeholder="Search student..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-10 p-3 border rounded"
-        />
-      </div>
-
       {/* Table */}
-      <div className="bg-white rounded shadow overflow-auto">
-        <table className="w-full">
-          <thead className="bg-blue-50 text-blue-900">
+      <div className="bg-white rounded shadow overflow-x-auto">
+        <table className="min-w-[800px] w-full">
+          <thead className="bg-blue-50 text-blue-900 text-sm md:text-base">
             <tr>
               {columnVisibility.student && <th className="p-3">Student</th>}
-              {columnVisibility.class && <th>Class</th>}
-              {columnVisibility.father && <th>Father</th>}
-              {columnVisibility.mother && <th>Mother</th>}
-              {columnVisibility.mobile && <th>Mobile</th>}
-              {columnVisibility.email && <th>Email</th>}
-              {columnVisibility.status && <th>Status</th>}
-              <th>Action</th>
+              {columnVisibility.class && <th className="p-3">Class</th>}
+              {columnVisibility.father && <th className="p-3">Father</th>}
+              {columnVisibility.mother && <th className="p-3">Mother</th>}
+              {columnVisibility.mobile && <th className="p-3">Mobile</th>}
+              {columnVisibility.email && <th className="p-3">Email</th>}
+              {columnVisibility.status && <th className="p-3">Status</th>}
+              <th className="p-3">Action</th>
             </tr>
           </thead>
 
-          <tbody>
+          <tbody className="text-sm md:text-base">
             {filteredStudents.map((s) => (
               <tr key={s.id} className="border-t hover:bg-gray-50">
+                
                 {columnVisibility.student && (
                   <td className="p-3">
                     <div>
@@ -139,15 +154,16 @@ export default function StudentProfiles() {
                   </td>
                 )}
 
-                {columnVisibility.class && <td>{s.classSection}</td>}
-                {columnVisibility.father && <td>{s.fatherName}</td>}
-                {columnVisibility.mother && <td>{s.motherName}</td>}
-                {columnVisibility.mobile && <td>{s.mobile}</td>}
-                {columnVisibility.email && <td>{s.email}</td>}
+                {columnVisibility.class && <td className="p-3">{s.classSection}</td>}
+                {columnVisibility.father && <td className="p-3">{s.fatherName}</td>}
+                {columnVisibility.mother && <td className="p-3">{s.motherName}</td>}
+                {columnVisibility.mobile && <td className="p-3">{s.mobile}</td>}
+                {columnVisibility.email && <td className="p-3">{s.email}</td>}
+
                 {columnVisibility.status && (
-                  <td>
+                  <td className="p-3">
                     <span
-                      className={`px-2 py-1 rounded text-sm ${
+                      className={`px-2 py-1 rounded text-xs md:text-sm ${
                         s.status === "active"
                           ? "bg-green-100 text-green-600"
                           : "bg-red-100 text-red-600"
@@ -158,11 +174,12 @@ export default function StudentProfiles() {
                   </td>
                 )}
 
-                <td>
-                  <button className="flex items-center gap-1 bg-yellow-500 text-white px-3 py-1 rounded">
+                <td className="p-3">
+                  <button className="flex items-center gap-1 text-xs md:text-sm bg-yellow-500 text-white px-2 md:px-3 py-1 rounded">
                     <FaEdit /> Edit
                   </button>
                 </td>
+
               </tr>
             ))}
           </tbody>
@@ -171,8 +188,8 @@ export default function StudentProfiles() {
 
       {/* Modal */}
       {showColumnsModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center">
-          <div className="bg-white p-6 rounded w-96">
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center p-4">
+          <div className="bg-white p-6 rounded w-full max-w-sm">
             <h2 className="font-bold mb-4">Customize Columns</h2>
 
             {Object.keys(columnVisibility).map((col) => (
@@ -187,13 +204,13 @@ export default function StudentProfiles() {
                     })
                   }
                 />
-                <label>{col}</label>
+                <label className="capitalize">{col}</label>
               </div>
             ))}
 
             <button
               onClick={() => setShowColumnsModal(false)}
-              className="mt-4 bg-blue-900 text-white px-4 py-2 rounded"
+              className="mt-4 w-full bg-blue-900 text-white px-4 py-2 rounded"
             >
               Save
             </button>

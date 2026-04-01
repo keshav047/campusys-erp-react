@@ -12,9 +12,7 @@ export default function Dashboard() {
           <h1 className="page-title">Student Information Dashboard</h1>
 
           <div className="page-actions">
-            <button className="action-btn btn-primary">
-              + Add New Student
-            </button>
+           
             <button className="action-btn btn-secondary">
               Export Report
             </button>
@@ -104,9 +102,7 @@ export default function Dashboard() {
           <h1 className="page-title">Student Profiles</h1>
 
           <div className="page-actions">
-            <button className="action-btn btn-primary">
-              + Add Student
-            </button>
+            
             <button className="action-btn btn-secondary">
               Filter
             </button>

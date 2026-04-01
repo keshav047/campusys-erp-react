@@ -31,6 +31,12 @@ import StudentProfiles from "../pages/student management/StudentProfiles";
 import TabsandSubtabs from "../pages/student management/TabsandSubtabs";
 import UserDefinedFields from "../pages/student management/UserDefinedFields";
 import Religions from "../pages/student management/Religions";
+import Demotions from "../pages/student management/Demotions";
+import Deregistration from "../pages/student management/Deregistration";
+import Promotions from "../pages/student management/Promotions";
+import SectionChange from "../pages/student management/SectionChange";
+import TransferCertificate from "../pages/student management/Transfer Certificate";
+import CertificateTemplates from "../pages/student management/CertificateTemplates";
 export default function AppRoutes() {
   return (
     <Routes>
@@ -74,6 +80,12 @@ export default function AppRoutes() {
         <Route path="tabsand-subtabs" element={<TabsandSubtabs/>} />
         <Route path="user-defined-fields" element={<UserDefinedFields/>} />
         <Route path="religions" element={<Religions/>} />
+        <Route path="demotions" element={<Demotions/>} />
+        <Route path="deregistration" element={<Deregistration/>} />
+        <Route path="promotions" element={<Promotions/>} />
+        <Route path="section-Change" element={<SectionChange/>} />
+        <Route path="transfer-certificate" element={<TransferCertificate/>} />
+        <Route path="Certificate-Templates" element={<CertificateTemplates/>} />
       </Route>
 
       <Route path="*" element={<Navigate to="/login" replace />} />
