@@ -42,7 +42,7 @@ const ReligionsPage = () => {
     <div className="p-6 bg-gray-100 min-h-screen">
       {/* Header */}
       <div className="flex justify-between items-center mb-5">
-        <h1 className="text-2xl font-semibold text-gray-800">
+        <h1 className="demotion-header">
           Religions
         </h1>
 

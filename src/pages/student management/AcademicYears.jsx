@@ -107,7 +107,7 @@ export default function AcademicYears() {
 
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
-        <h1 className="text-xl md:text-2xl font-bold text-blue-900">
+       <h1 style={{ color: "#1a4b8c", fontSize: "32px",fontWeight: "bold" }} >
           Academic Years
         </h1>
 

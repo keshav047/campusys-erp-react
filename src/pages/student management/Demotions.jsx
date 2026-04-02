@@ -88,7 +88,7 @@ export default function Demotions() {
           {/* HEADER */}
           <div className="demotion-header">
 
-            <h1 className="demotion-title">
+            <h1 style={{ color: "#1a4b8c", fontSize: "32px",fontWeight: "bold" }} >
               Student Demotions History
             </h1>
 
