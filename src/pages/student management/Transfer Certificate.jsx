@@ -70,7 +70,7 @@ export default function TransferCertificate() {
       {page === "list" && (
         <>
           <div style={styles.header}>
-            <h2 style={styles.title}>Transfer Certificates</h2>
+            <h2 style={{ fontSize: "28px", fontWeight: 800, color: "rgb(26, 75, 140)" }}>Transfer Certificates</h2>
 
             <div style={styles.actions}>
               <div style={styles.searchBox}>
@@ -339,7 +339,7 @@ export default function TransferCertificate() {
 const styles = {
   container: {
     padding: "20px",
-    background: "#f3f4f6",
+    background: "#f8fafc",
     minHeight: "100vh",
   },
 
@@ -347,6 +347,7 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     marginBottom: "20px",
+  
   },
 
   title: {
@@ -414,7 +415,7 @@ const styles = {
 
   /* FORM */
   formContainer: {
-    background: "#f5f7fb",
+    background: "#f8fafc",
     padding: "20px",
     borderRadius: "12px",
   },
@@ -482,8 +483,8 @@ const styles = {
   },
   heading: {
   color: "#1e3a8a",
-  fontSize: "22px",
-  fontWeight: "600",
+  fontSize: "28px",
+  fontWeight: "900",
 },
 
 backBtn: {

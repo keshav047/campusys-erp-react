@@ -62,14 +62,14 @@ const downloadCSV = () => {
 };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 md:p-6">
+    <div className="min-h-screen bg-gray-100 p-4 md:p-6" style={{ background: "#f8fafc" }}>
 
       {/* HEADER */}
       {/* HEADER (ONLY LIST PAGE) */}
 {page === "list" && (
   <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6">
 
-        <h1 className="text-xl md:text-2xl font-bold text-blue-900">
+        <h1 className="text-xl md:text-2xl font-bold text-blue-900" style={{ fontSize: "28px", fontWeight: 800, color: "rgb(26, 75, 140)" }}>
           Student Promotions
         </h1>
 
@@ -279,7 +279,7 @@ const downloadCSV = () => {
 
     {/* Save Button */}
     <div className="text-right">
-      <button className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 transition text-white px-6 py-3 rounded-md font-semibold">
+      <button className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 transition text-white px-6 py-3 rounded-md font-semibold" style={{ background: "#1e3a8a" }} >
         <span>🔒</span> Save All Promotions
       </button>
     </div>
@@ -347,7 +347,7 @@ const downloadCSV = () => {
 
         {/* Save Button */}
         <div className="flex justify-end">
-          <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg">
+          <button className="bg-[#1e3a8a] hover:bg-[#1a347a] text-white px-6 py-3 rounded-lg"  >
             💾 Save Selected Promotions
           </button>
         </div>
@@ -419,7 +419,7 @@ const downloadCSV = () => {
 
       {/* Save Button */}
       <div className="flex justify-end">
-        <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold">
+        <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold" style={{ background: "#1e3a8a" }}>
           💾 Save All Promotions
         </button>
       </div>

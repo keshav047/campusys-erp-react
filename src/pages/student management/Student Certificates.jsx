@@ -98,7 +98,7 @@ export default function StudentCertificates() {
                 onChange={(e) => setSearch(e.target.value)}
                 style={styles.searchInput}
               />
-              <button style={styles.searchBtn}>🔍 Search</button>
+              
               <button
                 style={styles.greenBtn}
                 onClick={() => setPage("form")}
@@ -127,9 +127,18 @@ export default function StudentCertificates() {
                     <td>{c.admissionNo}</td>
                     <td>{c.studentName}</td>
                     <td>{c.classSection}</td>
-                    <td>
-                      <button style={styles.printBtn}>🖨 Print</button>
-                    </td>
+                    <td className="p-3 flex justify-center gap-2" style={{paddingRight:"100px"}}>
+                  {/* Print */}
+                 
+
+                  {/* Delete */}
+                <button
+  onClick={() => window.print()}
+  className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-200 hover:bg-[#1e3a8a] hover:text-white transition"
+>
+  🖨
+</button>
+                </td>
                   </tr>
                 ))}
               </tbody>
@@ -200,19 +209,24 @@ export default function StudentCertificates() {
 const styles = {
   container: {
     padding: "30px",
-    background: "#f3f4f6",
+    background: "#f8fafc",
     minHeight: "100vh",
     fontFamily: "Arial",
+
   },
 
   title: {
     color: "#1e3a8a",
+    
+  fontSize: "28px",
+  fontWeight: "900",
   },
 
   headerRow: {
     display: "flex",
     justifyContent: "space-between",
     marginBottom: "20px",
+     
   },
 
   actions: {
@@ -236,7 +250,7 @@ const styles = {
   },
 
   greenBtn: {
-    background: "#10b981",
+    background: "#1e3a8a",
     color: "#fff",
     border: "none",
     padding: "10px 16px",

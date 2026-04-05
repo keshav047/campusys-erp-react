@@ -56,15 +56,17 @@ export default function StudentProfiles() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 md:p-6">
+   <div
+  className="min-h-screen bg-gray-100 p-4 md:p-6"
+  style={{ background: "#f8fafc" }}
+>
 
       {/* Top Bar */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6">
 
-        <h1 className="text-xl md:text-2xl font-bold text-blue-900">
-          Student Profiles
-        </h1>
-
+        <h1 className="text-xl md:text-[28px] font-extrabold text-[#1A4B8C]">
+  Student Profiles
+</h1>
         {/* Controls */}
         <div className="flex flex-col sm:flex-row flex-wrap gap-2 w-full md:w-auto">
 
@@ -174,10 +176,11 @@ export default function StudentProfiles() {
                   </td>
                 )}
 
-                <td className="p-3">
-                  <button className="flex items-center gap-1 text-xs md:text-sm bg-yellow-500 text-white px-2 md:px-3 py-1 rounded">
-                    <FaEdit /> Edit
+                   <td className="px-4 py-4 flex gap-2">
+                  <button className="w-9 h-9 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white">
+                    ✎
                   </button>
+                 
                 </td>
 
               </tr>

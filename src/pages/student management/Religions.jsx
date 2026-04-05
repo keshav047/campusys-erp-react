@@ -39,19 +39,14 @@ const ReligionsPage = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-6 bg-gray-100 min-h-screen" style={{ background: "#f8fafc" }}>
       {/* Header */}
       <div className="flex justify-between items-center mb-5">
-        <h1 className="demotion-header">
+        <h1 className="demotion-header" style={{ fontSize: "28px", fontWeight: 800, color: "rgb(26, 75, 140)" }}>
           Religions
         </h1>
 
-        <button
-          onClick={saveData}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow"
-        >
-          💾 Save All Changes
-        </button>
+       
       </div>
 
       {/* Card */}

@@ -152,12 +152,12 @@ export default function SectionChange() {
   );
 
   return (
-    <div className="p-4 md:p-6 bg-gray-100 min-h-screen">
+    <div className="p-4 md:p-6 bg-gray-100 min-h-screen" style={{ background: "#f8fafc" }}>
       {/* ================= LIST PAGE ================= */}
       {page === "list" && (
         <>
           <div className="flex justify-between mb-6 flex-wrap gap-3">
-            <h1 className="text-2xl font-bold text-blue-900">
+            <h1 className="text-2xl font-bold text-blue-900" style={{ fontSize: "28px", fontWeight: 800, color: "rgb(26, 75, 140)" }}>
               Section Change History
             </h1>
 

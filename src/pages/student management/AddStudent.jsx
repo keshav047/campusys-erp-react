@@ -125,7 +125,10 @@ const handleFileChange = (e) => {
 };
   return (
     <div className="p-6 w-full bg-gray-50 min-h-screen">
-      <h1 className="text-2xl font-bold text-blue-900 mb-6 border-b pb-2">
+     <h1
+  className="text-2xl font-bold text-blue-900 mb-6 border-b pb-2"
+  style={{ fontSize: "28px", fontWeight: 800, color: "rgb(26, 75, 140)" }}
+>
         Add New Student
       </h1>
 

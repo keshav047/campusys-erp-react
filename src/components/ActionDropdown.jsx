@@ -16,7 +16,8 @@ export default function ActionDropdown({ onChangePassword, onDeactivate }) {
   }, []);
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative inline-block" ref={dropdownRef}>
+      
       {/* Button */}
       <button
         onClick={() => setOpen(!open)}
@@ -28,7 +29,13 @@ export default function ActionDropdown({ onChangePassword, onDeactivate }) {
 
       {/* Dropdown */}
       {open && (
-        <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border z-50">
+        <div className="
+          absolute right-0 mt-2 
+          w-48 
+          max-w-[90vw]   /* screen ke bahar nahi jayega */
+          bg-white rounded-xl shadow-lg border z-50
+        ">
+          
           <button
             onClick={() => {
               setOpen(false);

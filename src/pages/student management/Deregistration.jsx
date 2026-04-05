@@ -88,7 +88,7 @@ export default function Deregistration() {
        {page === "list" && (
   <>
     <div className="content-header">
-      <h1 className="page-title">
+      <h1 className="page-title2">
         De-Registration & Suspension History
       </h1>
 

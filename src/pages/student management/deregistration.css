@@ -12,10 +12,10 @@
   gap: 15px;
 }
 
-.page-title {
-  font-size: 22px;
-  font-weight: bold;
-  color: #1a4b8c;
+.page-title2 {
+  font-size: 28px !important;
+  font-weight: bold !important;
+  color: #1a4b8c !important;
 }
 
 /* ===== ACTION AREA ===== */

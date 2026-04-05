@@ -189,8 +189,8 @@ const styles = {
   },
 
   title: {
-    fontSize: "20px",
-    fontWeight: "600",
+    fontSize: "28px",
+    fontWeight: "900",
     color: "#1e3a8a",
   },
 

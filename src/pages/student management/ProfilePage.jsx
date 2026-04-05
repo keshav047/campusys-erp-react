@@ -37,7 +37,7 @@ export default function ProfilePageSetup() {
 
         .container {
           padding: 25px;
-          background: #f4f7fb;
+          background: #f8fafc;
           min-height: 100vh;
         }
 
@@ -138,7 +138,7 @@ export default function ProfilePageSetup() {
 
       
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
-        <h1 className="text-xl md:text-2xl font-bold text-blue-900">
+        <h1 className="text-xl md:text-2xl font-bold text-blue-900" style={{ fontSize: "28px", fontWeight: 800, color: "rgb(26, 75, 140)" }}>
           Profile Page Setup
         </h1>
           <button className="btn" onClick={handleSave}>

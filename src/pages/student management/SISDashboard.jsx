@@ -9,7 +9,7 @@ export default function Dashboard() {
       <div className="module-content">
 
         <div className="content-header">
-          <h1 className="page-title">Student Information Dashboard</h1>
+          <h1 className="page-title1" >Student Information Dashboard</h1>
 
           <div className="page-actions">
            

@@ -2,7 +2,14 @@ import { useState } from "react";
 
 export default function AcademicYears() {
   const [years, setYears] = useState([
-  
+     {
+      id: 1,
+      shortName: "2023-24",
+      name: "Academic Year 2023-2024",
+      startDate: "2023-04-01",
+      endDate: "2024-03-31",
+      status: "active",
+    },
     {
       id: 2,
       shortName: "2022-23",
@@ -11,14 +18,7 @@ export default function AcademicYears() {
       endDate: "2023-03-31",
       status: "completed",
     },
-    {
-      id: 1,
-      shortName: "2023-24",
-      name: "Academic Year 2023-2024",
-      startDate: "2023-04-01",
-      endDate: "2024-03-31",
-      status: "active",
-    },
+   
   ]);
 
   const getStatus = (start, end) => {
@@ -32,12 +32,11 @@ export default function AcademicYears() {
     return "active";
   };
 
-  /* ✅ AUTO YEAR LOGIC ADDED HERE */
+  // ✅ Add row on TOP
   const addRow = () => {
     let lastYear = years[0];
 
     if (years.length > 0) {
-      // latest year find karo
       lastYear = years.reduce((max, curr) =>
         new Date(curr.startDate) > new Date(max.startDate)
           ? curr
@@ -68,7 +67,8 @@ export default function AcademicYears() {
       ),
     };
 
-    setYears([...years, newRow]);
+    // 🔥 MAIN CHANGE
+    setYears([newRow, ...years]);
   };
 
   const removeRow = (id) => {
@@ -107,13 +107,13 @@ export default function AcademicYears() {
 
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
-       <h1 style={{ color: "#1a4b8c", fontSize: "32px",fontWeight: "bold" }} >
+        <h1 className="text-[28px] font-extrabold text-[#1A4B8C]">
           Academic Years
         </h1>
 
         <button
           onClick={saveAll}
-          className="bg-blue-700 hover:bg-blue-800 text-white px-5 py-2 rounded-lg w-full md:w-auto"
+          className="bg-[#1e3a8a] hover:bg-[#1a347a] text-white px-5 py-2 rounded-lg w-full md:w-auto"
         >
           Save All Changes
         </button>
@@ -261,7 +261,7 @@ export default function AcademicYears() {
         {/* Add Row */}
         <button
           onClick={addRow}
-          className="mt-4 bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded w-full md:w-auto"
+          className="mt-4 bg-[#1e3a8a] hover:bg-[#1a347a] text-white px-5 py-2 rounded w-full md:w-auto"
         >
           + Add Row
         </button>

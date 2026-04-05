@@ -189,7 +189,7 @@ const header = {
 };
 
 const title = {
-  fontSize: "24px",
+  fontSize: "28px",
   fontWeight: "700",
   color: "#1a4b8c",
 };

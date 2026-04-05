@@ -79,16 +79,16 @@ export default function Demotions() {
   );
 
   return (
-    <div className="module-content">
+    <div className="module-content" >
 
       {/* ================= LIST PAGE ================= */}
       {page === "list" && (
-        <div className="demotion-container">
+        <div className="demotion-container" style={{ background: "#f8fafc" }}>
 
           {/* HEADER */}
           <div className="demotion-header">
 
-            <h1 style={{ color: "#1a4b8c", fontSize: "32px",fontWeight: "bold" }} >
+            <h1 style={{ color: "#1a4b8c", fontSize: "28px",fontWeight: 900 }} >
               Student Demotions History
             </h1>
 

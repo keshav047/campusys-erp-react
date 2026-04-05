@@ -52,7 +52,7 @@ export const sidebarData = {
             
             { name: "Profile Page Setup", path: "/profile-page" },
             { name: "User Defined Fields", path: "/user-defined-fields" },
-            { name: "Classes and Sections", path: "/add-class" },
+            { name: "Classes and Sections", path: "/classes-sections" },
              { name: "Student Groups", path: "/student-groups" },
  
   
