@@ -1,7 +1,13 @@
 import React, { useState } from "react";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 export default function CertificateTemplates() {
   const [showAdd, setShowAdd] = useState(false);
+
+  const [editorData, setEditorData] = useState(
+    "<h3 style='text-align:center'>CERTIFICATE</h3><p>Enter your certificate design here...</p>"
+  );
 
   const templates = [
     {
@@ -16,6 +22,24 @@ export default function CertificateTemplates() {
     },
   ];
 
+  const placeholderList = [
+    "{{student_name}}",
+    "{{admission_no}}",
+    "{{father_name}}",
+    "{{mother_name}}",
+    "{{class_section}}",
+    "{{current_date}}",
+    "{{principal_name}}",
+    "{{school_name}}",
+    "{{academic_year}}",
+    "{{certificate_number}}",
+  ];
+
+  // 👉 Insert placeholder into editor
+  const insertPlaceholder = (value) => {
+    setEditorData((prev) => prev + " " + value);
+  };
+
   return (
     <div style={styles.container}>
       {!showAdd ? (
@@ -29,8 +53,6 @@ export default function CertificateTemplates() {
                 style={styles.searchInput}
                 placeholder="Search by template name..."
               />
-
-              
 
               <button
                 style={styles.addBtn}
@@ -113,56 +135,53 @@ export default function CertificateTemplates() {
               </label>
 
               <div style={styles.placeholderList}>
-                {[
-                  "{{student_name}}",
-                  "{{admission_no}}",
-                  "{{father_name}}",
-                  "{{mother_name}}",
-                  "{{class_section}}",
-                  "{{current_date}}",
-                  "{{principal_name}}",
-                  "{{school_name}}",
-                  "{{academic_year}}",
-                  "{{certificate_number}}",
-                ].map((p, i) => (
-                  <span key={i} style={styles.badge}>
+                {placeholderList.map((p, i) => (
+                  <span
+                    key={i}
+                    style={styles.badge}
+                    onClick={() => insertPlaceholder(p)}
+                  >
                     {p}
                   </span>
                 ))}
               </div>
             </div>
 
-            {/* EDITOR */}
+            {/* CKEDITOR */}
             <div style={styles.fullRow}>
               <label style={styles.label}>
-                Certificate Design (WYSIWYG Editor)
+                Certificate Design 
               </label>
 
-              <div style={styles.toolbar}>
-                <button style={styles.toolBtn}>B</button>
-                <button style={styles.toolBtn}>I</button>
-                <button style={styles.toolBtn}>U</button>
-                <button style={styles.toolBtn}>≡</button>
-                <button style={styles.toolBtn}>•</button>
-                <button style={styles.toolBtn}>1.</button>
-
-                <select style={styles.select}>
-                  <option>Large</option>
-                  <option>Medium</option>
-                </select>
-
-                <select style={styles.select}>
-                  <option>Red</option>
-                  <option>Black</option>
-                </select>
-              </div>
-
-              <div style={styles.editor}>
-                <h3 style={{ textAlign: "center" }}>CERTIFICATE</h3>
-                <p>
-                  Enter your certificate design here. Use placeholders from the
-                  buttons above.
-                </p>
+              <div style={{ marginTop: "10px" }}>
+                <CKEditor
+                  editor={ClassicEditor}
+                  data={editorData}
+                  config={{
+                    toolbar: [
+                      "heading",
+                      "|",
+                      "bold",
+                      "italic",
+                      "underline",
+                      "strikethrough",
+                      "|",
+                      "bulletedList",
+                      "numberedList",
+                      "|",
+                      "link",
+                      "blockQuote",
+                      "insertTable",
+                      "|",
+                      "undo",
+                      "redo",
+                    ],
+                  }}
+                  onChange={(event, editor) => {
+                    const data = editor.getData();
+                    setEditorData(data);
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -177,7 +196,7 @@ export default function CertificateTemplates() {
 const styles = {
   container: {
     padding: "20px 30px",
-    background: "#f5f7fb",
+    background: "#f8fcfa",
     minHeight: "100vh",
   },
 
@@ -205,16 +224,6 @@ const styles = {
     padding: "12px 14px",
     borderRadius: "8px",
     border: "1px solid #d1d5db",
-    outline: "none",
-  },
-
-  searchBtn: {
-    background: "#1e3a8a",
-    color: "#fff",
-    padding: "12px 18px",
-    border: "none",
-    borderRadius: "8px",
-    cursor: "pointer",
   },
 
   addBtn: {
@@ -223,7 +232,6 @@ const styles = {
     padding: "12px 20px",
     border: "none",
     borderRadius: "10px",
-    fontWeight: "500",
     cursor: "pointer",
   },
 
@@ -231,7 +239,6 @@ const styles = {
     background: "#fff",
     borderRadius: "12px",
     padding: "15px",
-    boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
   },
 
   table: {
@@ -246,7 +253,6 @@ const styles = {
   th: {
     textAlign: "left",
     padding: "12px",
-    fontWeight: "600",
   },
 
   tr: {
@@ -262,8 +268,8 @@ const styles = {
     color: "#1e3a8a",
     padding: "5px 10px",
     borderRadius: "15px",
-    marginRight: "5px",
     fontSize: "12px",
+    cursor: "pointer",
   },
 
   actionBtns: {
@@ -276,7 +282,6 @@ const styles = {
     height: "35px",
     borderRadius: "50%",
     background: "#dbeafe",
-    color: "#1e40af",
     border: "none",
     cursor: "pointer",
   },
@@ -286,7 +291,6 @@ const styles = {
     height: "35px",
     borderRadius: "50%",
     background: "#fee2e2",
-    color: "#dc2626",
     border: "none",
     cursor: "pointer",
   },
@@ -318,33 +322,6 @@ const styles = {
     display: "flex",
     flexWrap: "wrap",
     gap: "10px",
-  },
-
-  toolbar: {
-    background: "#eee",
-    padding: "10px",
-    borderRadius: "6px",
-    display: "flex",
-    gap: "8px",
-    flexWrap: "wrap",
-  },
-
-  toolBtn: {
-    background: "#fff",
-    border: "1px solid #ccc",
-    padding: "5px 10px",
-  },
-
-  select: {
-    padding: "5px",
-  },
-
-  editor: {
-    border: "1px solid #ccc",
-    padding: "20px",
-    marginTop: "10px",
-    background: "#fafafa",
-    minHeight: "200px",
   },
 
   backBtn: {
