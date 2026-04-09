@@ -1,38 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ActionDropdown from "../../components/ActionDropdown";
+import { getUsers } from "../../api/api";
 
 export default function User() {
-  // 1500 dummy students
-  const [studentsData] = useState(
-    Array.from({ length: 1500 }, (_, i) => {
-      const names = [
-        "Rahul Sharma", "Priya Patel", "Amit Kumar", "Sneha Gupta", "Rohit Verma", "Neha Singh"
-      ];
-      const classes = ["10-A", "9-B", "11-C", "8-A", "12-A", "10-B"];
-      const passwords = ["rahul@123","priya@123","amit@123","sneha@123","rohit@123","neha@123"];
-      const statusList = ["Active","Inactive"];
-      const initialsList = ["RS","PP","AK","SG","RV","NS"];
-
-      const idx = i % 6;
-      return {
-        id: i + 1,
-        name: `${names[idx]} ${i+1}`,
-        adm: `ADM2023${String(i + 1).padStart(3, "0")}`,
-        cls: classes[idx],
-        password: passwords[idx],
-        status: statusList[i % 2],
-        initials: initialsList[idx],
-      };
-    })
-  );
-
+  const [studentsData, setStudentsData] = useState([]);
   const [showPassword, setShowPassword] = useState(null);
 
-  /* ========== PAGINATION STATES ========== */
-  const itemsPerPage = 500; // 500 rows per page
+  const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(studentsData.length / itemsPerPage);
 
+  /* ========= API CALL ========= */
+  useEffect(() => {
+    getUsers(0, 50, "STUDENT")
+      .then((res) => {
+        console.log("Student API:", res.data);
+
+        const users = res.data.content || res.data;
+
+        const formattedData = users.map((item, i) => ({
+          id: item.id || i + 1,
+          name: `${item.firstName || ""} ${item.lastName || ""}`,
+          adm: item.userName || "-",
+          cls: item.className || "-",
+          password: "********",
+          status: item.isActive ? "Active" : "Inactive",
+          initials: `${item.firstName?.[0] || ""}${item.lastName?.[0] || ""}`.toUpperCase(),
+        }));
+
+        setStudentsData(formattedData);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  /* ========= PAGINATION ========= */
+  const totalPages = Math.ceil(studentsData.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentStudents = studentsData.slice(startIndex, startIndex + itemsPerPage);
 

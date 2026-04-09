@@ -1,17 +1,21 @@
 import { NavLink } from "react-router-dom"
 import { useState } from "react"
 
-export default function Sidebar({ isOpen }) {
-  const [openUsers, setOpenUsers] = useState(true)
+export default function Sidebar({ isOpen, pages }) {
+
+  const [openMenu, setOpenMenu] = useState(null)
 
   const baseLink =
     "flex items-center gap-3 px-6 py-3 text-sm font-medium rounded-md transition-all duration-200"
+
   const activeLink =
     "bg-blue-50 text-blue-700 border-l-4 border-yellow-400"
+
   const normalLink =
     "text-gray-600 hover:bg-blue-50 hover:text-blue-700"
 
   return (
+
     <aside
       className={`
         fixed top-16 left-0
@@ -22,46 +26,78 @@ export default function Sidebar({ isOpen }) {
         overflow-y-auto
       `}
     >
+
       <div className="py-6">
+
         {/* Title */}
         <div className="px-6 mb-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">
           Main Menu
         </div>
 
-        {/* Links */}
-        <NavLink to="/user-management" className={({ isActive }) =>
-          `${baseLink} ${isActive ? activeLink : normalLink}`
-        }>📊 Dashboard</NavLink>
+        {pages.map((page, index) => {
 
-        <NavLink to="/user-role" className={({ isActive }) =>
-          `${baseLink} ${isActive ? activeLink : normalLink}`
-        }>👤 User Roles</NavLink>
+          // अगर subPages नहीं हैं
+          if (!page.subPages || page.subPages.length === 0) {
 
-        <NavLink to="/menu-rights" className={({ isActive }) =>
-          `${baseLink} ${isActive ? activeLink : normalLink}`
-        }>📂 Menu Rights</NavLink>
+            return (
+              <NavLink
+                key={page.pageId}
+                to={page.pagePath}
+                className={({ isActive }) =>
+                  `${baseLink} ${isActive ? activeLink : normalLink}`
+                }
+              >
+                {page.pageDisplayName}
+              </NavLink>
+            )
+          }
 
-        <NavLink to="/page-rights" className={({ isActive }) =>
-          `${baseLink} ${isActive ? activeLink : normalLink}`
-        }>📄 Page Rights</NavLink>
+          // अगर subPages हैं
+          return (
 
-        {/* Users submenu */}
-        <button
-          onClick={() => setOpenUsers(!openUsers)}
-          className={`${baseLink} w-full justify-between ${normalLink}`}
-        >
-          <span>👥 Users</span>
-          <span className="text-xs">{openUsers ? "▲" : "▼"}</span>
-        </button>
+            <div key={page.pageId}>
 
-        {openUsers && (
-          <div className="ml-6 mt-1 space-y-1 border-l pl-4">
-            <NavLink to="/user" className="block py-2 text-sm text-gray-500 hover:text-blue-700">Student Users</NavLink>
-            <NavLink to="/family-users" className="block py-2 text-sm text-gray-500 hover:text-blue-700">Family Users</NavLink>
-            <NavLink to="/employee-users" className="block py-2 text-sm text-gray-500 hover:text-blue-700">Employee Users</NavLink>
-          </div>
-        )}
+              <button
+                onClick={() =>
+                  setOpenMenu(openMenu === index ? null : index)
+                }
+                className={`${baseLink} w-full justify-between ${normalLink}`}
+              >
+                <span>{page.pageDisplayName}</span>
+                <span className="text-xs">
+                  {openMenu === index ? "▲" : "▼"}
+                </span>
+              </button>
+
+              {openMenu === index && (
+
+                <div className="ml-6 mt-1 space-y-1 border-l pl-4">
+
+                  {page.subPages.map((sub) => (
+
+                    <NavLink
+                      key={sub.pageId}
+                      to={sub.pagePath}
+                      className="block py-2 text-sm text-gray-500 hover:text-blue-700"
+                    >
+                      {sub.pageDisplayName}
+                    </NavLink>
+
+                  ))}
+
+                </div>
+
+              )}
+
+            </div>
+
+          )
+
+        })}
+
       </div>
+
     </aside>
+
   )
 }

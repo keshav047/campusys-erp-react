@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "./../api/authApi";
 import "./Login.css";
 
 export default function Login() {
+
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -18,30 +21,41 @@ export default function Login() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+
     e.preventDefault();
 
-    const hardUsername = "admin";
-    const hardPassword = "123456";
+    try {
 
-    if (
-      formData.username === hardUsername &&
-      formData.password === hardPassword
-    ) {
-      localStorage.setItem("token","admin123")
+      const response = await loginUser(formData);
+
+      console.log(response.data);
+
+      // token save
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("userId", response.data.userId);
+
       setShowModal(true);
 
       setTimeout(() => {
         navigate("/dashboard");
       }, 2000);
-    } else {
+
+    } catch (error) {
+
+      console.error(error);
       alert("Invalid Username or Password ❌");
+
     }
+
   };
 
   return (
+
     <div className="login-container">
+
       <div className="login-wrapper">
+
         <div className="left-side">
           <div className="logo-container">
             <div className="logo-icon"></div>
@@ -49,12 +63,14 @@ export default function Login() {
         </div>
 
         <div className="right-side">
+
           <div className="login-header">
             <h2>Welcome to Campusys</h2>
             <p>Sign in to access your account</p>
           </div>
 
           <form className="login-form" onSubmit={handleSubmit}>
+
             <div className="form-group">
               <label>Username</label>
               <input
@@ -88,11 +104,13 @@ export default function Login() {
             <button type="submit" className="login-btn">
               Sign In
             </button>
+
           </form>
 
-         
         </div>
+
       </div>
+
     </div>
   );
 }

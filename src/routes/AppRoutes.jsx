@@ -29,13 +29,13 @@ export default function AppRoutes() {
   </Route>
       <Route path="/" element={<MainLayout />}>
         
-        <Route path="user-management" element={<UserManagementDashboard />} />
-        <Route path="user-role" element={<UserRole />} />
+        <Route path="usermanagementdashboard" element={<UserManagementDashboard />} />
+        <Route path="userrole" element={<UserRole />} />
         <Route path="user" element={<User />} />
         <Route path="family-users" element={<FamilyUsers />} />
         <Route path="employee-users" element={<EmployeeUsers />} />
-        <Route path="menu-rights" element={<MenuRights />} />
-        <Route path="page-rights" element={<PageRights />} />
+        <Route path="menurights" element={<MenuRights />} />
+        <Route path="pagerights" element={<PageRights />} />
         <Route path="create-role" element={<CreatingNewRole />} />
         <Route path="add-role" element={<AddRole />} />
       </Route>

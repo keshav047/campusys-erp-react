@@ -4,13 +4,22 @@ import { useNavigate } from "react-router-dom"
 export default function Navbar({ setSidebar }) {
 
   const [open, setOpen] = useState(false)
+  const [user, setUser] = useState(null) // 👈 add
   const dropdownRef = useRef(null)
-  const navigate = useNavigate() // navigate function
+  const navigate = useNavigate()
 
   const handleLogout = () => {
     localStorage.clear()
     navigate("/login")
   }
+
+  // 👇 Get user from localStorage
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"))
+    if (storedUser) {
+      setUser(storedUser)
+    }
+  }, [])
 
   // click outside close dropdown
   useEffect(() => {
@@ -25,30 +34,18 @@ export default function Navbar({ setSidebar }) {
   }, [])
 
   return (
-    <header className="
-      sticky top-0 z-50
-      h-16
-      flex items-center justify-between
-      px-6
-      text-white
-      shadow
-      bg-[linear-gradient(135deg,var(--primary-blue),var(--dark-blue))]
-    ">
+    <header className="sticky top-0 z-50 h-16 flex items-center justify-between px-6 text-white shadow bg-[linear-gradient(135deg,var(--primary-blue),var(--dark-blue))]">
 
       {/* Left Side */}
       <div className="flex items-center gap-3">
 
-        <button
-          onClick={() => setSidebar(prev => !prev)}
-          className="text-2xl mr-2"
-        >
+        <button onClick={() => setSidebar(prev => !prev)} className="text-2xl mr-2">
           ☰
         </button>
 
-        {/* Logo - add onClick for dashboard */}
         <div
           className="flex items-center gap-2 cursor-pointer"
-          onClick={() => navigate("/dashboard")} // <<< CLICK HANDLER
+          onClick={() => navigate("/dashboard")}
         >
           <div className="w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center text-blue-900 font-bold">
             C
@@ -77,19 +74,23 @@ export default function Navbar({ setSidebar }) {
             className="flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full"
           >
             <div className="w-8 h-8 bg-yellow-400 text-blue-900 rounded-full flex items-center justify-center font-bold">
-              JS
+              {/* 👇 Initials */}
+              {user?.name
+                ? user.name.split(" ").map(n => n[0]).join("").toUpperCase()
+                : "U"}
             </div>
-            <span className="text-sm">John Smith</span>
+
+            {/* 👇 Name */}
+            <span className="text-sm">
+              {user?.name || "User"}
+            </span>
           </button>
 
           {open && (
             <div className="absolute right-0 mt-3 w-48 bg-white text-gray-700 rounded-xl shadow-lg overflow-hidden">
 
               {["My Profile", "Change Password", "Talk to Expert"].map(i => (
-                <div
-                  key={i}
-                  className="px-4 py-3 hover:bg-blue-50 cursor-pointer"
-                >
+                <div key={i} className="px-4 py-3 hover:bg-blue-50 cursor-pointer">
                   {i}
                 </div>
               ))}

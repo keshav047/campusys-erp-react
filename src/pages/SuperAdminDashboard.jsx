@@ -1,17 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./SuperAdminDashboard.css";
 import { Link } from "react-router-dom";
+import { getUserById } from "./../api/userApi";
+import { getGroupById } from "./../api/groupApi";
 
 const SuperAdminDashboard = () => {
 
-  const modules = [
-    { icon: "👥", title: "User Management", desc: "Manage user accounts", link: "/user-management" },
-    { icon: "📘", title: "Academics", desc: "Curriculum & courses" },
-    { icon: "✅", title: "Attendance", desc: "Track student presence" },
-    { icon: "📈", title: "Performance", desc: "Grades & analytics" },
-    { icon: "📅", title: "Timetable", desc: "Class schedules" },
-    { icon: "📢", title: "Announcements", desc: "School notices" },
-  ];
+  const [modules, setModules] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+
+    const fetchModules = async () => {
+      try {
+
+        const userId = localStorage.getItem("userId");
+
+        if (!userId) {
+          console.log("No userId found in localStorage");
+          setLoading(false);
+          return;
+        }
+
+        // USER API
+        const userRes = await getUserById(userId);
+        const groupId = userRes?.data?.groupId;
+
+        localStorage.setItem("groupId", groupId); // Store groupId for later use
+
+        console.log("USER ID:", userId);
+        console.log("GROUP ID from User API:", groupId);
+        
+        if (!groupId) {
+          console.log("No groupId found");
+          setLoading(false);
+          return;
+        }
+
+        // GROUP API
+        const groupRes = await getGroupById(groupId);
+
+        const modulesData = groupRes?.data?.appModules || [];
+
+        setModules(modulesData);
+
+      } catch (error) {
+        console.log("API ERROR:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchModules();
+
+  }, []);
 
   return (
     <div className="dashboard-wrapper">
@@ -37,27 +79,47 @@ const SuperAdminDashboard = () => {
             </div>
 
             <div className="modules-grid">
-              {modules.map((module, index) => {
 
-                const card = (
-                  <div className="module-card">
-                    <div className="module-icon">{module.icon}</div>
-                    <h3>{module.title}</h3>
-                    <p>{module.desc}</p>
-                  </div>
-                );
+              {loading ? (
+                <p>Loading modules...</p>
+              ) : modules.length === 0 ? (
+                <p>No modules assigned</p>
+              ) : (
 
-                return module.link ? (
-                  <Link key={index} to={module.link} className="module-link">
-                    {card}
-                  </Link>
-                ) : (
-                  <div key={index}>
-                    {card}
-                  </div>
-                );
+      modules.map((module, index) => {
 
-              })}
+  const path =
+    module.displayName === "User Management"
+      ? "/usermanagementdashboard"
+      : "#";
+
+  const card = (
+    <div className="module-card">
+      <div className="module-icon">📦</div>
+      <h3>{module?.displayName}</h3>
+      <p>{module?.description}</p>
+    </div>
+  );
+
+  return path !== "#" ? (
+    <Link
+      key={index}
+      to={path}
+      className="module-link"
+      onClick={() => {
+        localStorage.setItem("activeModuleId", module.id)
+      }}
+    >
+      {card}
+    </Link>
+  ) : (
+    <div key={index}>{card}</div>
+  );
+
+})
+
+              )}
+
             </div>
           </div>
 

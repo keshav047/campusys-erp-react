@@ -1,183 +1,135 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { getModuleById } from "../api/moduleApi"
 
-export default function MenuRights() {
+export default function PageRights() {
 
-const roles = ["Administrator","Teacher","Student","Parent","Staff"]
+  const roles = ["Administrator","Teacher","Student","Parent","Staff"]
 
-const moduleMenus = {
+  const moduleId = "e96f8bfb-6022-40ce-869a-8e003354c43c"
 
-student:[
-{ id:"profile", name:"Student Profile" },
-{ id:"attendance", name:"Attendance" },
-{ id:"grades", name:"Grades" },
-{ id:"fees", name:"Fee Details" },
-{ id:"timetable", name:"Timetable" }
-],
+  const [menus,setMenus] = useState([])
+  const [search,setSearch] = useState("")
+  const [rights,setRights] = useState({})
 
-teacher:[
-{ id:"profile", name:"Teacher Profile" },
-{ id:"attendance", name:"Attendance" },
-{ id:"grades", name:"Grades" },
-{ id:"timetable", name:"Timetable" },
-{ id:"students", name:"Student List" }
-],
+  // ================= LOAD MODULE =================
+  useEffect(() => {
 
-attendance:[
-{ id:"att_daily", name:"Daily Attendance" },
-{ id:"att_reports", name:"Attendance Reports" },
-{ id:"att_summary", name:"Attendance Summary" }
-],
+    getModuleById(moduleId).then(res => {
 
-academics:[
-{ id:"aca_courses", name:"Courses" },
-{ id:"aca_subjects", name:"Subjects" },
-{ id:"aca_syllabus", name:"Syllabus" },
-{ id:"aca_exams", name:"Examinations" }
-],
+      const module = res.data
 
-finance:[
-{ id:"fin_fees", name:"Fee Management" },
-{ id:"fin_invoices", name:"Invoices" },
-{ id:"fin_reports", name:"Financial Reports" }
-]
+      const allMenus = []
 
-}
+      module.pages.forEach(page => {
 
-const [module,setModule] = useState("")
-const [search,setSearch] = useState("")
-const [rights,setRights] = useState({})
+        allMenus.push({
+          id: page.id,
+          name: page.displayName
+        })
 
-const handleCheck = (menu,role)=>{
+        if(page.subPages?.length){
+          page.subPages.forEach(sub => {
+            allMenus.push({
+              id: sub.id,
+              name: `↳ ${sub.displayName}`
+            })
+          })
+        }
 
-setRights(prev => ({
-...prev,
-[menu]:{
-...(prev[menu] || {}),
-[role]:!prev?.[menu]?.[role]
-}
-}))
+      })
 
-}
+      setMenus(allMenus)
 
-const menus = module ? moduleMenus[module] : []
+    })
 
-const filteredMenus = menus.filter(menu =>
-menu.name.toLowerCase().includes(search.toLowerCase())
-)
+  }, [])
 
-return (
+  // ================= HANDLE CHECK =================
+  const handleCheck = (menuId, role) => {
 
-<div className="p-6 bg-gray-50 min-h-screen">
+    setRights(prev => ({
+      ...prev,
+      [menuId]: {
+        ...(prev[menuId] || {}),
+        [role]: !prev?.[menuId]?.[role]
+      }
+    }))
 
-<h1 className="text-2xl font-bold text-blue-700 mb-6">
-Page Rights Management
-</h1>
+  }
 
-{/* Controls */}
+  // ================= FILTER =================
+  const filteredMenus = menus.filter(menu =>
+    menu.name.toLowerCase().includes(search.toLowerCase())
+  )
 
-<div className="flex gap-4 mb-6">
+  return (
 
-<select
-className="border px-4 py-2 rounded-lg"
-value={module}
-onChange={(e)=>setModule(e.target.value)}
->
+    <div className="p-6 bg-gray-50 min-h-screen">
 
-<option value="">Select Module</option>
-<option value="student">Student Management</option>
-<option value="teacher">Teacher Management</option>
-<option value="attendance">Attendance</option>
-<option value="academics">Academics</option>
-<option value="finance">Finance</option>
+      <h1 className="text-2xl font-bold text-blue-700 mb-6">
+        Page Rights Management
+      </h1>
 
-</select>
+      <input
+        type="text"
+        placeholder="Search menu..."
+        value={search}
+        onChange={(e)=>setSearch(e.target.value)}
+        className="border px-4 py-2 rounded-lg w-64 mb-6"
+      />
 
-<input
-type="text"
-placeholder="Search menu..."
-value={search}
-onChange={(e)=>setSearch(e.target.value)}
-className="border px-4 py-2 rounded-lg w-64"
-/>
+      <div className="bg-white rounded-xl shadow overflow-x-auto">
 
-</div>
+        <table className="w-full text-sm">
 
-{/* Table */}
+          <thead className="bg-blue-100 text-blue-700">
+            <tr>
+              <th className="px-4 py-3 text-left">Menu</th>
 
-{module && (
+              {roles.map(role => (
+                <th key={role} className="px-4 py-3 text-center">
+                  {role}
+                </th>
+              ))}
 
-<div className="bg-white rounded-xl shadow overflow-x-auto">
+            </tr>
+          </thead>
 
-<table className="w-full text-sm">
+          <tbody className="divide-y">
 
-<thead className="bg-blue-100 text-blue-700">
+            {filteredMenus.map(menu => (
 
-<tr>
+              <tr key={menu.id}>
 
-<th className="px-4 py-3 text-left">
-Menu
-</th>
+                <td className="px-4 py-3 font-medium">
+                  {menu.name}
+                </td>
 
-{roles.map(role => (
-<th key={role} className="px-4 py-3 text-center">
-{role}
-</th>
-))}
+                {roles.map(role => (
 
-</tr>
+                  <td key={role} className="px-4 py-3 text-center">
 
-</thead>
+                    <input
+                      type="checkbox"
+                      checked={rights?.[menu.id]?.[role] || false}
+                      onChange={()=>handleCheck(menu.id,role)}
+                    />
 
-<tbody className="divide-y">
+                  </td>
 
-{filteredMenus.map(menu => (
+                ))}
 
-<tr key={menu.id}>
+              </tr>
 
-<td className="px-4 py-3 font-medium">
-{menu.name}
-</td>
+            ))}
 
-{roles.map(role => (
+          </tbody>
 
-<td key={role} className="px-4 py-3 text-center">
+        </table>
 
-<input
-type="checkbox"
-checked={rights?.[menu.id]?.[role] || false}
-onChange={()=>handleCheck(menu.id,role)}
-/>
+      </div>
 
-</td>
+    </div>
 
-))}
-
-</tr>
-
-))}
-
-</tbody>
-
-</table>
-
-</div>
-
-)}
-
-<div className="mt-6 flex gap-4">
-
-<button className="bg-gray-500 text-white px-6 py-2 rounded-lg">
-Cancel
-</button>
-
-<button className="bg-blue-600 text-white px-6 py-2 rounded-lg">
-Save
-</button>
-
-</div>
-
-</div>
-
-)
-
+  )
 }

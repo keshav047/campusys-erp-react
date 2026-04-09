@@ -1,57 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ActionDropdown from "../../components/ActionDropdown";
+import { getUsers } from "../../api/api"; // ✅ API import
 
 export default function User() {
 
-  // 1500 dummy employees
-  const [employeesData] = useState(
-    Array.from({ length: 1500 }, (_, i) => {
-
-      const names = [
-        "Rahul Sharma","Priya Patel","Amit Kumar",
-        "Sneha Gupta","Rohit Verma","Neha Singh"
-      ];
-
-      const departments = [
-        "HR","Accounts","IT","Admin","Sales","Management"
-      ];
-
-      const roles = [
-        "Manager","Executive","Developer","Coordinator","Assistant","Admin"
-      ];
-
-      const passwords = [
-        "rahul@123","priya@123","amit@123",
-        "sneha@123","rohit@123","neha@123"
-      ];
-
-      const statusList = ["Active","Inactive"];
-
-      const initialsList = ["RS","PP","AK","SG","RV","NS"];
-
-      const idx = i % 6;
-
-      return {
-        id: i + 1,
-        name: `${names[idx]} ${i+1}`,
-        empId: `EMP2023${String(i + 1).padStart(3, "0")}`,
-        department: departments[idx],
-        role: roles[idx],
-        password: passwords[idx],
-        status: statusList[i % 2],
-        initials: initialsList[idx],
-      };
-    })
-  );
-
+  const [employeesData, setEmployeesData] = useState([]);
   const [showPassword, setShowPassword] = useState(null);
 
   /* PAGINATION */
-  const itemsPerPage = 500;
+  const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
+
+  /* ========= API CALL ========= */
+  useEffect(() => {
+    getUsers(0, 100, "EMPLOYEE") // 🔥 important: userType EMPLOYEE
+      .then((res) => {
+        console.log("Employee API:", res.data);
+
+        const users = res.data.content || res.data;
+
+        const formattedData = users.map((item, i) => ({
+          id: item.id || i + 1,
+          name: `${item.firstName || ""} ${item.lastName || ""}`,
+          empId: item.userName || "-",
+          department: item.departmentName || "-",
+          role: item.roleName || "-",
+          password: "********",
+          status: item.isActive ? "Active" : "Inactive",
+          initials: `${item.firstName?.[0] || ""}${item.lastName?.[0] || ""}`.toUpperCase(),
+        }));
+
+        setEmployeesData(formattedData);
+      })
+      .catch((err) => {
+        console.error("Employee API Error:", err);
+      });
+  }, []);
+
   const totalPages = Math.ceil(employeesData.length / itemsPerPage);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
+
   const currentEmployees = employeesData.slice(
     startIndex,
     startIndex + itemsPerPage
@@ -147,7 +136,9 @@ export default function User() {
                       onChangePassword={() =>
                         alert(`Change password for ${e.name}`)
                       }
-                      onDeactivate={() => alert(`Deactivate ${e.name}`)}
+                      onDeactivate={() =>
+                        alert(`Deactivate ${e.name}`)
+                      }
                     />
                   </td>
 
